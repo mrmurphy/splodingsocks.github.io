@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 group :development do
-  gem 'rake'
+  gem 'rake', '0.9.2.2'
   gem 'rack'
   gem 'jekyll'
   gem 'rdiscount'
@@ -10,7 +10,7 @@ group :development do
   gem 'haml', '>= 3.1'
   gem 'compass', '>= 0.11'
   gem 'rubypants'
-  gem 'rb-fsevent'
+  gem 'rb-fsevent', '>=0.9'
   gem 'stringex'
   gem 'liquid', '2.2.2'
 end
