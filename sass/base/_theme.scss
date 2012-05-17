@@ -1,21 +1,16 @@
-$noise-bg: image-url('noise.png') top left !default;
 $img-border: inline-image('dotted-border.png');
-
-// Main background color
-$main-bg: $noise-bg;
-
-// Main Link Colors
-$link-color: lighten(#165b94, 3) !default;
-$link-color-hover: adjust-color($link-color, $lightness: 10, $saturation: 25) !default;
-$link-color-visited: adjust-color($link-color, $hue: 80, $lightness: -4) !default;
-$link-color-active: adjust-color($link-color-hover, $lightness: -15) !default;
 
 // Main Section Colors
 $main-color: #f8f8f8 !default;
-$primary-color: #E96363;
+$primary-color: #F7641C;
 $primary-color-light: desaturate($primary-color, 20);
-$secondary-color: #74B8D8;
+$secondary-color: #37ABC2;
 $secondary-color-light: desaturate($secondary-color, 20);
+$h-color: #1C5E9E;
+
+// Main background color
+$noise-bg: image-url('noise.png') top left, $main-color !default;
+$main-bg: $noise-bg;
 
 $title-color: $primary-color !default;
 $subtitle-color: $secondary-color !default;
@@ -23,6 +18,12 @@ $subtitle-color: $secondary-color !default;
 $text-color: #222 !default;
 $text-color-light: #aaa !default;
 $type-border: #ddd !default;
+
+// Main Link Colors
+$link-color: $secondary-color-light !default;
+$link-color-hover: $primary-color-light;
+$link-color-visited: $primary-color-light;
+$link-color-active: $h-color;
 
 /* Body */
 hr {
@@ -73,7 +74,11 @@ a {
   @include transition(color .3s);
 }
 
-.header-title > a{
+a {
+  text-decoration: none;
+}
+
+.header-title {
     color: $primary-color; 
     text-decoration: none;
 }

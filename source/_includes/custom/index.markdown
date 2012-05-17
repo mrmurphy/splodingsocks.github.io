@@ -1,5 +1,5 @@
 
-<img class="homepage-image" src="/images/biopic_small.png" alt="A small picture of Murphy." no-frame="true"/>
+<img class="homepage-image" src="/images/biopic_small.png" width=250 height=250 alt="A small picture of Murphy." no-frame="true"/>
 
 #### I'm Murphy, a technical artist finishing an Animation BFA at Brigham Young University.
 

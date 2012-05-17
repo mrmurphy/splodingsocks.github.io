@@ -84,6 +84,9 @@ article {
     .byline + time:before, time +time:before, .comments:before, .byline ~ .categories:before {
       @extend .separator;
     }
+
+    
+    
     .next-buttons{
       font-size:4em;
       a {
