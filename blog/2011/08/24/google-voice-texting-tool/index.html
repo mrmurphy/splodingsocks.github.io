@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Murphy</title>
+  <title>Google Voice texting tool. - Murphy</title>
   <meta name="author" content="Murphy Randle">
 
   
-  <meta name="description" content="Blog Archive 2012 How I went about keeping a chain of joints together.
-May 14 2012 posted in Homework Renderman Training Tidbits, No. 1
-Feb 23 2012 &hellip;">
+  <meta name="description" content="My wife and I sometime volunteer to be leaders for the new students at our university. Since we need to contact 30 students at a time, and they all &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ Feb 23 2012 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://murphyspublic.github.com/blog/archives">
+  <link rel="canonical" href="http://murphyspublic.github.com/blog/2011/08/24/google-voice-texting-tool">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -69,80 +67,108 @@ Feb 23 2012 &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
+
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Google Voice Texting Tool.</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-24T00:00:00-06:00" pubdate data-updated="true">Aug 24<span>th</span>, 2011</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>My wife and I sometime volunteer to be leaders for the new students at our university. Since we need to contact 30 students at a time, and they all have cell phones, texting is the way to go.  The problem is that it seems like most cell phone carriers (including google voice) don&#8217;t allow sending an SMS to more than about five people at once (to reduce spam?). Here&#8217;s the script I wrote to get around that:</p>
 
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/05/14/how-i-went-about-keeping-a-chain-of-joints-together/">How I went about keeping a chain of joints together.</a></h1>
-<time datetime="2012-05-14T10:22:00-06:00" pubdate><span class='month'>May</span> <span class='day'>14</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/homework/'>Homework</a></span>
-</footer>
+<h2>Google Voice, a marvelous tool:</h2>
 
 
-</article>
+<p>If you haven&#8217;t checked out <a href="http://voice.google.com">Google Voice</a> yet, I highly recommend doing so. Google Voice provides Free SMS plus a number of other features. I use SMS most regularly though. I love the ease with which I can view and compose text messages right from the browser. It does require that you sign up for a new free number. I did that a year ago, and I just give people my google number now, which forwards to my cell number.</p>
+
+<p>Google voice in the browser will not let you send an SMS to more than five people at once, so here&#8217;s where I had to turn to:</p>
+
+<h2>pygooglevoice</h2>
 
 
+<p><a href="http://code.google.com/p/pygooglevoice/">pygooglevoice</a> is a python API for google voice. This means that I can use the functions that GV offers without having to use their interface. It means that I can use them from a script, which is MUCH more convenient for mass operations.</p>
 
-<article>
-  
-<h1><a href="/blog/2012/02/23/renderman-training-tidbits-no-1/">Renderman Training Tidbits, No. 1</a></h1>
-<time datetime="2012-02-23T00:00:00-07:00" pubdate><span class='month'>Feb</span> <span class='day'>23</span> <span class='year'>2012</span></time>
+<p>To install it on mac os X, i just opened the terminal and run this command:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/training/'>Training</a></span>
-</footer>
+<pre class="syntax {bash}">sudo easy_install -U pygooglevoice</pre>
 
 
-</article>
+<p>&nbsp;</p>
 
+<p><a href="http://snipt.net/murphyspublic/send-sms-using-google-voice/">and then I wrote this little script to be able to send texts to a list of people. The cool thing is that if you type &#8220;NAME&#8221; in all caps in the body of the text, it will be replaced by the name of the person who is being texted.</a></p>
 
-
-  
-  <h2>2011</h2>
-
-<article>
-  
-<h1><a href="/blog/2011/10/21/intermediate-gnu-make-tutorial/">Intermediate GNU Make tutorial.</a></h1>
-<time datetime="2011-10-21T00:00:00-06:00" pubdate><span class='month'>Oct</span> <span class='day'>21</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/training/'>Training</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2011/08/24/google-voice-texting-tool/">Google Voice texting tool.</a></h1>
-<time datetime="2011-08-24T00:00:00-06:00" pubdate><span class='month'>Aug</span> <span class='day'>24</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/little-projects/'>Little Projects</a></span>
-</footer>
-
-
-</article>
-
+<p>&nbsp;</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Murphy Randle</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-24T00:00:00-06:00" pubdate data-updated="true">Aug 24<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/little-projects/'>Little Projects</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://murphyspublic.github.com/blog/2011/08/24/google-voice-texting-tool/" data-via="" data-counturl="http://murphyspublic.github.com/blog/2011/08/24/google-voice-texting-tool/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="next-buttons">
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/10/21/intermediate-gnu-make-tutorial/" title="Next Post: Intermediate GNU Make tutorial.">&raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>

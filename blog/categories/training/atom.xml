@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Training | Murphy]]></title>
+  <link href="http://murphyspublic.github.com/blog/categories/training/atom.xml" rel="self"/>
+  <link href="http://murphyspublic.github.com/"/>
+  <updated>2012-05-16T20:14:42-06:00</updated>
+  <id>http://murphyspublic.github.com/</id>
+  <author>
+    <name><![CDATA[Murphy Randle]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Renderman Training Tidbits, No. 1]]></title>
+    <link href="http://murphyspublic.github.com/blog/2012/02/23/renderman-training-tidbits-no-1/"/>
+    <updated>2012-02-23T00:00:00-07:00</updated>
+    <id>http://murphyspublic.github.com/blog/2012/02/23/renderman-training-tidbits-no-1</id>
+    <content type="html"><![CDATA[<p>Here's a video tutorial on attenuating lights with pre-calculated occlusion in RenderMan Studio 3.
+Thanks to Bert Poole and Chris Harvey for helping!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Intermediate GNU Make tutorial.]]></title>
+    <link href="http://murphyspublic.github.com/blog/2011/10/21/intermediate-gnu-make-tutorial/"/>
+    <updated>2011-10-21T00:00:00-06:00</updated>
+    <id>http://murphyspublic.github.com/blog/2011/10/21/intermediate-gnu-make-tutorial</id>
+    <content type="html"><![CDATA[<p>When I was just starting to use GNU MAKE, I was frustrated out of my mind, trying to learn how to set up an efficient makefile for my small school project.</p>
+
+<p>The tutorials I found were either basic, or too in-depth. I found no help for a novice user. Eventually, I dug into the manual and spent a number of hours figuring out how to do what I wanted. Then I made this video, which gives a few hints on how to do some automation in your makefile, without using crazy wizard magic.</p>
+
+<h4>Disclaimer:</h4>
+
+<p>Please remember that this is not a bullet proof solution. After all, a novice came up with it. Nevertheless it worked fine for my small school assignment.</p>
+]]></content>
+  </entry>
+  
+</feed>
