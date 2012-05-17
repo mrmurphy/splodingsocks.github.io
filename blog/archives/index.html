@@ -26,45 +26,67 @@ Feb 23 2012 &hellip;">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="/javascripts/jquery.inputlables.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Murphy" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href='http://fonts.googleapis.com/css?family=Imprima' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
   
 
 </head>
 
-<body   >
+<body    class="collapse-sidebar sidebar-footer" >
+  <div id="header-wrapper">
   <header role="banner"><hgroup>
-  <span class="header-title"><a href="/">Murphy</a></span>
-  <span class="header-subtitle">
-  
-    Randle
-  
-  </span>
+    <a href="/">
+        <span class="header-title">Murphy</span>
+        <span class="header-subtitle">
+        
+        Randle
+        
+        </span>
+    </a>
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <nav role="navigation"><ul class="main-navigation">
+    <li><a href="/"><i class="icon-home"></i></a></li>
+  <li><a href="/blog/archives"><i class="icon-newspaper"></i></a></li>
+
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">
+    <i class="icon-feed"></i>
+  </a></li>
   
-</ul>
+    <li><a href="murphyspublic@gmail.com" rel="subscribe-email" title="subscribe via email">
+      <i class="icon-mail"></i>
+    </a></li>
   
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:murphyspublic.github.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
   
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li class="li-search">
+    <a href=""><i class="icon-search"></i></a>
+  
+  </li>
 </ul>
 
+  <div id="search-wrapper">
+    <form action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:murphyspublic.github.com" />
+        <label for='main-search-box'>Type here, and then hit enter!</label>
+        <input class="search" id='main-search-box' type="text" name="q" results="0"/>
+      </fieldset>
+    </form>
+  </div>
+  <script type="text/javascript">
+    $('form').inputLabels();
+  </script>
+
 </nav>
+  </div>
   <div id="main">
     <div id="content">
       <div>
@@ -171,6 +193,51 @@ Feb 23 2012 &hellip;">
   </ul>
 </section>
 
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/murphyspublic">@murphyspublic</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'murphyspublic',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("murphyspublic", 5, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/murphyspublic" class="twitter-follow-button" data-show-count="false">Follow @murphyspublic</a>
+  
+</section>
 
 
 
@@ -189,6 +256,19 @@ Feb 23 2012 &hellip;">
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'murphyspublic';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
