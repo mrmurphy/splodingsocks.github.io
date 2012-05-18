@@ -6,12 +6,11 @@
   position: relative
   top: 0px
   font-size: $nav-font-size
-  // text-transform: uppercase
   +transition-property
   +transition-duration(0.1s)
   &:hover
     top: -2px
-    text-shadow: transparentize(darken($nav-link-color-hover, 0), 0.65) 0px 3px 2px
+    text-shadow: darken($nav-link-color-hover, 20) 0px 3px 0px, darken($nav-link-color-hover, 20) 0px 2px 0px, darken($nav-link-color-hover, 20) 0px 1px 0px
 
 #header-wrapper
   +display-box
@@ -51,6 +50,19 @@
     margin: 0px
     border: 0px
     padding: 0px
+    li
+      a
+        color: $alt-nav-link-color
+        text-shadow: darken($alt-nav-link-color, 10) 0px 1px 0px
+        position: relative
+        top: 0px
+        +transition-property
+        +transition-duration(0.1s)
+        &:hover
+          color: $secondary-color
+          text-shadow: darken($secondary-color, 20) 0px 1px 0px, darken($secondary-color, 20) 0px 2px 0px, darken($secondary-color, 20) 0px 3px 0px
+          top: -2px
+
 
 // Define the way the search box works.
 #search-wrapper
