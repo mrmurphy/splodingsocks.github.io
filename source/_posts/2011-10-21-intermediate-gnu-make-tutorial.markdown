@@ -7,6 +7,7 @@ type: post
 published: true
 categories: [Training]
 video_url: http://www.youtube.com/embed/dqflr7_TqQ8
+comments: true
 ---
 
 When I was just starting to use GNU MAKE, I was frustrated out of my mind, trying to learn how to set up an efficient makefile for my small school project.

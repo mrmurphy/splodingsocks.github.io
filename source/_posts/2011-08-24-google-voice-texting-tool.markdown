@@ -6,6 +6,7 @@ status: publish
 type: post
 published: true
 categories: [Little Projects]
+comments: true
 ---
 My wife and I sometime volunteer to be leaders for the new students at our university. Since we need to contact 30 students at a time, and they all have cell phones, texting is the way to go.  The problem is that it seems like most cell phone carriers (including google voice) don't allow sending an SMS to more than about five people at once (to reduce spam?). Here's the script I wrote to get around that:
 <h2>Google Voice, a marvelous tool:</h2>
