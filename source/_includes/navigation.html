@@ -10,17 +10,7 @@
   {% endif %}
   {% if site.simple_search %}
   <li class="li-search">
-    <a href=""><i class="icon-search"></i></a>
+    <a id="search-button-nav" href=""><i class="icon-search"></i></a>
   {% endif %}
   </li>
 </ul>
-{% if site.simple_search %}
-  <div id="search-wrapper">
-    <form action="{{ site.simple_search }}" method="get">
-      <fieldset role="search">
-        <input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}" />
-        <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-      </fieldset>
-    </form>
-  </div>
-{% endif %}

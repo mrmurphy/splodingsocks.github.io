@@ -1,0 +1,21 @@
+#header-wrapper > header
+  background: transparentize(yellow, 0.5)
+  h1
+    display: inline-block
+    margin: 0
+    a, a:visited, a:hover
+      color: $title_color
+      text-decoration: none
+  h2
+    margin: .2em 0 0
+    @extend .main-font
+    font-size: 1em
+    color: $subtitle-color
+    font-weight: normal
+
+#header-wrapper > nav
+  background: transparentize(black, 0.5)
+
+#header-wrapper
+  text-align: right
+  background: transparentize(blue, 0.9)
