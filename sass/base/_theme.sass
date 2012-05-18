@@ -25,6 +25,12 @@ $link-color-hover: $primary-color-light
 $link-color-visited: $primary-color-light
 $link-color-active: $h-color
 
+// Nav Link Colors
+$nav-link-color: desaturate($secondary-color, 0) !default
+$nav-link-color-hover: $primary-color-light
+$nav-link-color-visited: $nav-link-color
+$nav-link-color-active: $h-color
+
 /* Body
 hr
   background: $img-border bottom left repeat-x
@@ -67,9 +73,6 @@ a
 
 aside.sidebar a
   +link-colors($sidebar-link-color, $hover: $sidebar-link-color-hover, $focus: $sidebar-link-color-hover, $active: $sidebar-link-color-active)
-
-a
-  +transition(color 0.3s)
 
 a
   text-decoration: none

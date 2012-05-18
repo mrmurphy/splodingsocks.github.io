@@ -1,5 +1,27 @@
+// Define the look of the main navigation.
+.main-navigation a
+  padding: 4px
+  +link-colors($nav-link-color, $hover: $nav-link-color-hover, $focus: $nav-link-color-hover, $visited: $nav-link-color-visited, $active: $nav-link-color-active)
+  text-shadow: darken($nav-link-color, 20) 0px 1px 0px
+  position: relative
+  top: 0px
+  font-size: $nav-font-size
+  // text-transform: uppercase
+  +transition-property
+  +transition-duration(0.1s)
+  &:hover
+    top: -2px
+    text-shadow: transparentize(darken($nav-link-color-hover, 0), 0.65) 0px 3px 2px
+
+#header-wrapper
+  +display-box
+  +box-orient(horizontal)
+  +box-align(stretch)
+  margin-top: 0.3em
+
+// Define the layout and look of the whole header.
 #header-wrapper > header
-  background: transparentize(yellow, 0.5)
+  +box-flex(1)
   h1
     display: inline-block
     margin: 0
@@ -14,8 +36,56 @@
     font-weight: normal
 
 #header-wrapper > nav
-  background: transparentize(black, 0.5)
-
-#header-wrapper
+  +box-flex(1)
   text-align: right
-  background: transparentize(blue, 0.9)
+
+//Now make the alternative nav bar go where we want.
+.alt-navigation
+  font-size: 3em
+  line-height: 1.5em
+  position: fixed
+  right: 10px
+  bottom: 10px
+  ul
+    list-style-type: none
+    margin: 0px
+    border: 0px
+    padding: 0px
+
+// Define the way the search box works.
+#search-wrapper
+  $search-color: $primary-color
+  text-align: center
+  width: 100%
+  background: $search-color
+  padding: 5px 0px
+  +box-shadow(transparentize(black, 0.7) 0 5px 20px 0px inset)
+  +border-bottom-radius(15px)
+  border-top: 1px solid darken($primary-color, 25)
+  form
+    height: 100%
+    fieldset
+      height: 100%
+  input.hidden
+    margin: 0px
+    border: 0px
+    padding: 0px
+  input.search
+    $text-color: darken($search-color, 25) 
+    +text-shadow(transparentize(darken($text-color, 50), 0.8) 1px 1px 2px)
+    color: $text-color
+    background: none
+    border: none
+    text-align: center
+    font-size: 1em
+    width: 100%
+    margin: 0px
+    padding: 0px
+    &:focus
+      outline: none
+    i
+      padding: 4px
+
+// Hide the mobile nav from the computer view
+.mobile-nav
+  display: none
