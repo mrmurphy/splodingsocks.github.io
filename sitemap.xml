@@ -1,35 +1,33 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://murphyspublic.github.com/blog/2011/08/24/google-voice-texting-tool/</loc>
+        <loc>http://murphyrandle.com/blog/2011/08/24/google-voice-texting-tool/</loc>
         <lastmod>2012-05-18T11:08:30-06:00</lastmod>
     </url>
     <url>
-        <loc>http://murphyspublic.github.com/blog/2011/10/21/intermediate-gnu-make-tutorial/</loc>
+        <loc>http://murphyrandle.com/blog/2011/10/21/intermediate-gnu-make-tutorial/</loc>
         <lastmod>2012-05-18T11:08:25-06:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://murphyspublic.github.com/blog/2012/02/23/renderman-training-tidbits-no-1/
-        </loc>
+        <loc>http://murphyrandle.com/blog/2012/02/23/renderman-training-tidbits-no-1/</loc>
         <lastmod>2012-05-18T11:08:19-06:00</lastmod>
     </url>
     <url>
         <loc>
-            http://murphyspublic.github.com/blog/2012/05/14/how-i-went-about-keeping-a-chain-of-joints-together/
+            http://murphyrandle.com/blog/2012/05/14/how-i-went-about-keeping-a-chain-of-joints-together/
         </loc>
         <lastmod>2012-05-17T18:18:19-06:00</lastmod>
     </url>
     <url>
-        <loc>http://murphyspublic.github.com/blog/archives/</loc>
+        <loc>http://murphyrandle.com/blog/archives/</loc>
         <lastmod>2012-05-18T11:08:30-06:00</lastmod>
     </url>
     <url>
-        <loc>http://murphyspublic.github.com/blog/</loc>
+        <loc>http://murphyrandle.com/blog/</loc>
         <lastmod>2012-05-18T11:08:30-06:00</lastmod>
     </url>
     <url>
-        <loc>http://murphyspublic.github.com/</loc>
+        <loc>http://murphyrandle.com/</loc>
         <lastmod>2012-05-18T11:08:30-06:00</lastmod>
     </url>
 </urlset>
