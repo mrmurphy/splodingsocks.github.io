@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Little Projects | Murphy]]></title>
+  <link href="http://murphyrandle.com/blog/categories/little-projects/atom.xml" rel="self"/>
+  <link href="http://murphyrandle.com/"/>
+  <updated>2012-05-22T15:19:09-06:00</updated>
+  <id>http://murphyrandle.com/</id>
+  <author>
+    <name><![CDATA[Murphy Randle]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Google Voice texting tool.]]></title>
+    <link href="http://murphyrandle.com/blog/2011/08/24/google-voice-texting-tool/"/>
+    <updated>2011-08-24T00:00:00-06:00</updated>
+    <id>http://murphyrandle.com/blog/2011/08/24/google-voice-texting-tool</id>
+    <content type="html"><![CDATA[<p>My wife and I sometime volunteer to be leaders for the new students at our university. Since we need to contact 30 students at a time, and they all have cell phones, texting is the way to go.  The problem is that it seems like most cell phone carriers (including google voice) don't allow sending an SMS to more than about five people at once (to reduce spam?). Here's the script I wrote to get around that:</p>
+
+<h2>Google Voice, a marvelous tool:</h2>
+
+
+<p>If you haven't checked out <a href="http://voice.google.com">Google Voice</a> yet, I highly recommend doing so. Google Voice provides Free SMS plus a number of other features. I use SMS most regularly though. I love the ease with which I can view and compose text messages right from the browser. It does require that you sign up for a new free number. I did that a year ago, and I just give people my google number now, which forwards to my cell number.</p>
+
+<p>Google voice in the browser will not let you send an SMS to more than five people at once, so here's where I had to turn to:</p>
+
+<h2>pygooglevoice</h2>
+
+
+<p><a href="http://code.google.com/p/pygooglevoice/">pygooglevoice</a> is a python API for google voice. This means that I can use the functions that GV offers without having to use their interface. It means that I can use them from a script, which is MUCH more convenient for mass operations.</p>
+
+<p>To install it on mac os X, i just opened the terminal and run this command:</p>
+
+<pre class="syntax {bash}">sudo easy_install -U pygooglevoice</pre>
+
+
+<p>&nbsp;</p>
+
+<p><a href="http://snipt.net/murphyspublic/send-sms-using-google-voice/">and then I wrote this little script to be able to send texts to a list of people. The cool thing is that if you type "NAME" in all caps in the body of the text, it will be replaced by the name of the person who is being texted.</a></p>
+
+<p>&nbsp;</p>
+]]></content>
+  </entry>
+  
+</feed>

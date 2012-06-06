@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Google Voice texting tool. - Murphy</title>
+  <meta name="author" content="Murphy Randle">
+
+  
+  <meta name="description" content="My wife and I sometime volunteer to be leaders for the new students at our university. Since we need to contact 30 students at a time, and they all &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://murphyrandle.com/blog/2011/08/24/google-voice-texting-tool">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="/javascripts/jquery.inputlabels.js" type="text/javascript"></script>
+  <script src="/javascripts/actions.js" type="text/javascript"></script>
+  <script src="/javascripts/search.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Murphy" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Imprima' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1919368-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <div id="header-wrapper">
+  <header role="banner"><hgroup>
+    <a href="/">
+        <span class="header-title">Murphy</span>
+        <span class="header-subtitle">
+        
+        Randle
+        
+        </span>
+    </a>
+</hgroup>
+
+</header>
+  <nav role="navigation"><div class="main-navigation">
+    <a href="/">Info</a>
+  <a href="/blog">Weblog</a>
+  <a href="http://resume.io/murphyspublic/tuflujach9">Resume</a>
+
+  
+    <a id="search-button-nav" href=""><i class="icon-search"></i></a>
+  
+</div>
+<div class="alt-navigation">
+  <ul title="alt-nav-vertical-list">
+  
+    <li><a href="http://www.github.com/murphyspublic"><i class="icon-github"></i></a></li>
+  
+  
+    <li><a href="http://twitter.com/murphyspublic"><i class="icon-twitter"></i></a></li>
+  
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS"><i class="icon-rss"></i></a></li>
+  
+</ul>
+
+</div>
+</nav>
+  </div>
+  
+  <div id="search-wrapper">
+    <form action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:murphyrandle.com" />
+        <label for='main-search-box'>Type your query here, and then press enter.</label>
+        <input class="search" id='main-search-box' type="text" name="q" results="0"/>
+      </fieldset>
+    </form>
+  </div>
+
+
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+    
+      <h1 class="entry-title">Google Voice Texting Tool.</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-24T00:00:00-06:00" pubdate data-updated="true">Aug 24<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>My wife and I sometime volunteer to be leaders for the new students at our university. Since we need to contact 30 students at a time, and they all have cell phones, texting is the way to go.  The problem is that it seems like most cell phone carriers (including google voice) don&#8217;t allow sending an SMS to more than about five people at once (to reduce spam?). Here&#8217;s the script I wrote to get around that:</p>
+
+<h2>Google Voice, a marvelous tool:</h2>
+
+
+<p>If you haven&#8217;t checked out <a href="http://voice.google.com">Google Voice</a> yet, I highly recommend doing so. Google Voice provides Free SMS plus a number of other features. I use SMS most regularly though. I love the ease with which I can view and compose text messages right from the browser. It does require that you sign up for a new free number. I did that a year ago, and I just give people my google number now, which forwards to my cell number.</p>
+
+<p>Google voice in the browser will not let you send an SMS to more than five people at once, so here&#8217;s where I had to turn to:</p>
+
+<h2>pygooglevoice</h2>
+
+
+<p><a href="http://code.google.com/p/pygooglevoice/">pygooglevoice</a> is a python API for google voice. This means that I can use the functions that GV offers without having to use their interface. It means that I can use them from a script, which is MUCH more convenient for mass operations.</p>
+
+<p>To install it on mac os X, i just opened the terminal and run this command:</p>
+
+<pre class="syntax {bash}">sudo easy_install -U pygooglevoice</pre>
+
+
+<p>&nbsp;</p>
+
+<p><a href="http://snipt.net/murphyspublic/send-sms-using-google-voice/">and then I wrote this little script to be able to send texts to a list of people. The cool thing is that if you type &#8220;NAME&#8221; in all caps in the body of the text, it will be replaced by the name of the person who is being texted.</a></p>
+
+<p>&nbsp;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Murphy Randle</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-24T00:00:00-06:00" pubdate data-updated="true">Aug 24<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/little-projects/'>Little Projects</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://murphyrandle.com/blog/2011/08/24/google-voice-texting-tool/" data-via="murphyspublic" data-counturl="http://murphyrandle.com/blog/2011/08/24/google-voice-texting-tool/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="next-buttons">
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/10/21/intermediate-gnu-make-tutorial/" title="Next Post: Intermediate GNU Make tutorial.">&raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Murphy Randle -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'murphyrandle';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://murphyrandle.com/blog/2011/08/24/google-voice-texting-tool/';
+        var disqus_url = 'http://murphyrandle.com/blog/2011/08/24/google-voice-texting-tool/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
