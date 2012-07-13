@@ -1,0 +1,11 @@
+.sharing {
+  p.meta + & {
+    text-align: center;
+    padding: {
+      top: 2em;
+      bottom: 2em;
+      left: 0; };
+    background: $img-border top left repeat-x; } }
+
+#fb-root {
+  display: none; }
