@@ -1,103 +1,18 @@
-// Define the look of the main navigation.
-.main-navigation a {
-  padding: 4px;
-  @include link-colors($nav-link-color, $hover: $nav-link-color-hover, $focus: $nav-link-color-hover, $visited: $nav-link-color-visited, $active: $nav-link-color-active);
-  text-shadow: darken($nav-link-color, 20) 0px 1px 0px;
-  position: relative;
-  top: 0px;
-  font-size: $nav-font-size;
-  @include transition-property;
-  @include transition-duration(0.1s);
-  &:hover {
-    top: -2px;
-    text-shadow: darken($nav-link-color-hover, 20) 0px 3px 0px, darken($nav-link-color-hover, 20) 0px 2px 0px, darken($nav-link-color-hover, 20) 0px 1px 0px; } }
-
-#header-wrapper {
-  @include display-box;
-  @include box-orient(horizontal);
-  @include box-align(stretch);
-  margin-top: 0.3em;
-  width: 100%; }
-
-// Define the layout and look of the whole header.
-#header-wrapper > header {
-  @include box-flex(1);
+body > header {
+  background: $header-bg;
   h1 {
     display: inline-block;
     margin: 0;
     a, a:visited, a:hover {
       color: $title_color;
-      text-decoration: none; } }
+      text-decoration: none;
+    }
+  }
   h2 {
-    margin: 0.2em 0 0;
-    @extend .main-font;
+    margin: .2em 0 0;
+    @extend .sans;
     font-size: 1em;
     color: $subtitle-color;
-    font-weight: normal; } }
-
-#header-wrapper > nav {
-  @include box-flex(1);
-  text-align: right; }
-
-//Now make the alternative nav bar go where we want.
-.alt-navigation {
-  font-size: 3em;
-  line-height: 1.5em;
-  position: fixed;
-  right: 10px;
-  bottom: 10px;
-  ul {
-    list-style-type: none;
-    margin: 0px;
-    border: 0px;
-    padding: 0px;
-    li {
-      a {
-        color: $alt-nav-link-color;
-        text-shadow: darken($alt-nav-link-color, 10) 0px 1px 0px;
-        position: relative;
-        top: 0px;
-        @include transition-property;
-        @include transition-duration(0.1s);
-        &:hover {
-          color: $secondary-color;
-          text-shadow: darken($secondary-color, 20) 0px 1px 0px, darken($secondary-color, 20) 0px 2px 0px, darken($secondary-color, 20) 0px 3px 0px;
-          top: -2px; } } } } }
-
-// Define the way the search box works.
-#search-wrapper {
-  $search-color: $primary-color;
-  text-align: center;
-  width: 100%;
-  background: $search-color;
-  padding: 5px 0px;
-  @include box-shadow(transparentize(black, 0.7) 0 5px 20px 0px inset);
-  @include border-bottom-radius(15px);
-  border-top: 1px solid darken($primary-color, 25);
-  form {
-    height: 100%;
-    fieldset {
-      height: 100%; } }
-  input.hidden {
-    margin: 0px;
-    border: 0px;
-    padding: 0px; }
-  input.search {
-    $text-color: darken($search-color, 25);
-    @include text-shadow(transparentize(darken($text-color, 50), 0.8) 1px 1px 2px);
-    color: $text-color;
-    background: none;
-    border: none;
-    text-align: center;
-    font-size: 1em;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    &:focus {
-      outline: none; }
-    i {
-      padding: 4px; } } }
-
-// Hide the mobile nav from the computer view
-.mobile-nav {
-  display: none; }
+    font-weight: normal;
+  }
+}

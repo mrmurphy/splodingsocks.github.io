@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How I went about keeping a chain of joints together."
+title: "Keep tabs on those joints"
 date: 2012-05-14 10:22
 comments: true
 categories: [Homework]

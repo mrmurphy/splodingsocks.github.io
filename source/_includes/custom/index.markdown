@@ -5,8 +5,7 @@
 
 I specialize in developing technology for animation. My past experiences include Render TD on **Cars 2** at Pixar, pipeline development on four BYU Senior films, and freelance graphics / animation.
 
-- - - 
-
+<div class="clear"></div>
 ###Hot off the presses:
 <div id="blog-archives">
 {% for post in site.posts reverse %}

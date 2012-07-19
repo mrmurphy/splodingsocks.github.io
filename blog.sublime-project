@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/Murphy/github/octopress",
+			"folder_exclude_patterns": [".*", "public"]
+		}
+	]
+}

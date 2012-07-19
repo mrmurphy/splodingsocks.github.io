@@ -1,13 +1,3 @@
-{% if page.video_url %}
-  <div class="less-fancy-video-header">
-    <iframe 
-      class="yt-embed" 
-      src="{{ page.video_url }}?&amp;rel=0&amp;showinfo=0&amp;autohide=1&amp;hd=1&amp;wmode=transparent" 
-      frameborder="0" 
-      allowfullscreen="true"
-      ></iframe>
-  </div>
-{% endif %}
 {% unless page.no_header %}
   <header>
     {% if index %}
@@ -18,7 +8,7 @@
     {% unless page.meta == false %}
       <p class="meta">
         {% include post/date.html %}{{ time }}
-        {% if site.disqus_short_name and page.comments != false and site.disqus_show_comment_count == true %}
+        {% if site.disqus_short_name and page.comments != false and post.comments != false and site.disqus_show_comment_count == true %}
          | <a href="{% if index %}{{ root_url }}{{ post.url }}{% endif %}#disqus_thread">Comments</a>
         {% endif %}
       </p>
