@@ -11,3 +11,5 @@ comments: true
 ---
 Here's a video tutorial on attenuating lights with pre-calculated occlusion in RenderMan Studio 3.
 Thanks to Bert Poole and Chris Harvey for helping!
+
+<iframe width="1280" height="720" src="http://www.youtube.com/embed/kRHmGVViySw" frameborder="0" allowfullscreen></iframe>
