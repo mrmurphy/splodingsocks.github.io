@@ -1,10 +1,11 @@
 ---
 layout: post
-title: "Boost.Python, SCons, and the Mac“
+title: “Building python modules. (Boost.Python, SCons, and Mac).”
 date: 2012-10-11 12:35
 comments: true
-categories: howto, documentation
+categories: [howto, documentation]
 ---
+
 I’ve mentioned before that I’m helping a colleague with the vizualizations for his master’s thesis. He’s in love with C++, and has written his whole implementation that way. I, however, am in love with Python. Plus, I’m going to be doing some integration with Maya, and would much rather use the Maya python api than the C++ API.  
 
 This is where Boost.Python comes in. [Boost](http://www.boost.org/) is a great collection of libraries for extending the functionality and convenience of C++. Boost.Python is a convenient wrapper to Python’s C API. This makes it comparatively easy to expose a python API to existing C++ code. And that’s just what I’m trying to do.
