@@ -1,6 +1,6 @@
 ---
 layout: post
-title: “Building python modules. (Boost.Python, SCons, and Mac).”
+title: Building python modules. (Boost.Python, SCons, and Mac).
 date: 2012-10-11 12:35
 comments: true
 categories: [howto, documentation]
@@ -35,11 +35,14 @@ It took me quite a bit of experimenting and searching to get the correct configu
 	env.SharedLibrary('hello_ext', 'hello.cpp')
 	
 `libs` (in line 1) stores the string that will tell SCons we are going to be looking for the boost_python compiled library when linking.  
-`libpath` is the path to those libraries.
+
+`libpath` is the path to those libraries.  
+
 `includes` Boost.Python will need access to `pyconfig.h` and other python C++ headers, which are located where your python install includes are. If you don’t include this directory, your build will break!  
+
 `frameworks = “Python”` Since we’re on a mac, we need to tell SCons to include the Python system framework while compiling.  
 
-Now let me draw your attention to the line `SHLIBSUFFIX=‘.so’. Python, when importing, expects either a .py file, or a .so file. The default mac extension for a shared library is `.dylib`. With this variable we are telling SCons to use the .so suffix instead of the default.
+Now let me draw your attention to the line `SHLIBSUFFIX=‘.so’`. Python, when importing, expects either a `.py` file, or a `.so` file. The default mac extension for a shared library is `.dylib`. With this variable we are telling SCons to use the `.so` suffix instead of the default.
 
 Lastly, we use `env.SharedLibrary` to build the shared object file. It’s important that the name of the shared library be the same as the module name you told Boost.Python to give your module in the C++ file.
 
