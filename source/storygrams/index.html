@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Storygrams</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+</head>
+<body>
+
+
+
+
+  <div class="row">
+    <div class="two columns" align="right">
+      <h1>Storygrams</h1>
+      <p class="info">There are stories everywhere.</p>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="one columns centered">
+      <h2>Here's the deal</h2>
+      <p>Our minds are incredibly good at inventing <span class="highlighted">stories</span>. It may be much easier for you to remember stories than random facts. Many of our brains are designed to understand the world in terms of narrative.</p>
+      <p>As an exercise, I've included some images below taken with <a href="http://instagram.com">Instagram</a>. To the left, there's an image, and to the right there's an area for you to write whatever story your mind invents about the image. I've done the first one for you. At the end, you can enter your contact information, and send me your stories. That way you're not alone in your creativity!
+    </div>
+    <br>
+  </div>
+  <form action="MAILTO:murphyspublic@gmail.com" method="post" enctype="text/plain">
+  <div class="row">
+    <div class="one columns" align="center">
+      <img src="http://distilleryimage4.s3.amazonaws.com/95926cb20cb411e2840e1231381b59da_7.jpg"></img>
+    </div>
+    <div class="one columns" align="center">
+      <textarea class="storytext" type="text" name="Story 1" value="">My boss can be so odd sometimes. Today he gave me a little plastic tag that said "Sesame Street" and instructed me that there was a dog out behind the office. I was to go and put the tag on the tog right away. I've learned not to ask they "why" behind my boss's instructions, so I dropped my bag, and headed out back. 
+
+I saw the dog right away. It looked like he had been trying to get into the trash cans to find some food. I tried to grab the dog so that I could attach the tag, but he thought I wanted to play "chase". Dogs can be really good at evasive maneuvers. I spent 45 minutes chasing that dog around until he finally got so interested in a passing squirrel that he took off running. There was no way I was going to catch him.
+
+I turned around to head back into the office, and caught sight of one of my coworkers, just ducking out of sight. 
+
+I'm pretty sure they only keep me around here to make them laugh.</textarea>
+    </div>
+
+    <div class="one columns" align="center">
+      <img src="http://static.thepioneerwoman.com/photography/files/2012/01/instagram.jpg"></img>
+    </div>
+    <div class="one columns" align="center">
+      <textarea class="storytext" type="text" name="Story 2" value=""></textarea><br>
+    </div>
+
+    <div class="one columns" align="center">
+      <img src="http://distilleryimage2.s3.amazonaws.com/48164edcd39c11e191d612313804ede0_7.jpg"></img>
+    </div>
+    <div class="one columns" align="center">
+      <textarea class="storytext" type="text" name="Story 3" value=""></textarea><br>
+    </div>
+
+
+<div class="one columns" align="center">
+      <img src="http://distilleryimage2.s3.amazonaws.com/3d55ceb6240d11e28d7e22000a1f8cf4_7.jpg"></img>
+    </div>
+    <div class="one columns" align="center">
+      <textarea class="storytext" type="text" name="Story 4" value=""></textarea><br>
+    </div>
+
+    <div class="one columns" align="center">
+      <img src="http://distilleryimage0.s3.amazonaws.com/d4f20a90138d11e2b74c22000a1de2a7_7.jpg"></img>
+    </div>
+    <div class="one columns" align="center">
+      <textarea class="storytext" type="text" name="Story 5" value=""></textarea><br>
+    </div>
+<div class = "two columns" align="center">
+  <input type="submit" class="button" value="Send it to me!">
+</div>
+
+  </div>
+</form>
+
+
+
+
+  
+  <!-- Included JS Files (Uncompressed) -->
+  <!--
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script>
+  <script src="javascripts/jquery.foundation.forms.js"></script>
+  <script src="javascripts/jquery.event.move.js"></script>
+  <script src="javascripts/jquery.event.swipe.js"></script>
+  <script src="javascripts/jquery.foundation.reveal.js"></script>
+  <script src="javascripts/jquery.foundation.orbit.js"></script>
+  <script src="javascripts/jquery.foundation.navigation.js"></script>
+  <script src="javascripts/jquery.foundation.buttons.js"></script>
+  <script src="javascripts/jquery.foundation.tabs.js"></script>
+  <script src="javascripts/jquery.foundation.tooltips.js"></script>
+  <script src="javascripts/jquery.foundation.accordion.js"></script>
+  <script src="javascripts/jquery.placeholder.js"></script>
+  <script src="javascripts/jquery.foundation.alerts.js"></script>
+  <script src="javascripts/jquery.foundation.topbar.js"></script>
+  <script src="javascripts/jquery.foundation.joyride.js"></script>
+  <script src="javascripts/jquery.foundation.clearing.js"></script>
+  <script src="javascripts/jquery.foundation.magellan.js"></script>
+  
+  -->
+  
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
+  
+    <script>
+    $(window).load(function(){
+      $("#featured").orbit();
+    });
+    </script> 
+
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+  
+</body>
+</html>
