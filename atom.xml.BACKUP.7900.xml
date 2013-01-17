@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Murphy]]></title>
+  <link href="http://murphyrandle.github.com/atom.xml" rel="self"/>
+  <link href="http://murphyrandle.github.com/"/>
+<<<<<<< HEAD
+  <updated>2012-10-11T13:08:23-06:00</updated>
+=======
+  <updated>2012-07-18T23:13:03-06:00</updated>
+>>>>>>> Site updated at 2012-07-19 05:13:08 UTC
+  <id>http://murphyrandle.github.com/</id>
+  <author>
+    <name><![CDATA[Murphy Randle]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+<<<<<<< HEAD
+    <title type="html"><![CDATA[Building python modules. (Boost.Python, SCons, and Mac).]]></title>
+    <link href="http://murphyrandle.github.com/blog/2012/10/11/boost-dot-python/"/>
+    <updated>2012-10-11T12:35:00-06:00</updated>
+    <id>http://murphyrandle.github.com/blog/2012/10/11/boost-dot-python</id>
+    <content type="html"><![CDATA[<p>I’ve mentioned before that I’m helping a colleague with the vizualizations for his master’s thesis. He’s in love with C++, and has written his whole implementation that way. I, however, am in love with Python. Plus, I’m going to be doing some integration with Maya, and would much rather use the Maya python api than the C++ API.</p>
+
+<p>This is where Boost.Python comes in. <a href="http://www.boost.org/">Boost</a> is a great collection of libraries for extending the functionality and convenience of C++. Boost.Python is a convenient wrapper to Python’s C API. This makes it comparatively easy to expose a python API to existing C++ code. And that’s just what I’m trying to do.</p>
+
+<p>This little article documents the few things I had to get straight in   my mind for this situation to work on my custom project. building with SCons, on a Mac. It’s not a guide to using Boost.Python.</p>
+
+<h2>Build boost.</h2>
+
+<p>First, you’ll need to build the boost libraries for your system and make sure that they are located in a place where you can link to them. Not all boost libraries need to be compiled, but Boost.Python does.</p>
+
+<h2>Get your SConstruct right!</h2>
+
+<p>It took me quite a bit of experimenting and searching to get the correct configuration in my SConstruct file. Here’s the working copy:</p>
+
+<pre><code>libs = Split("boost_python")
+libpath = Split("lib/x86_64-mac")
+includes = Split("include /usr/include/python2.7 ")
+frameworks = Split("Python")
+
+env = Environment(
+                  CPPPATH = includes,
+                  LIBS = libs,
+                  LIBPATH = libpath,
+                  FRAMEWORKS = frameworks,
+                  SHLIBPREFIX = '',
+                  SHLIBSUFFIX = '.so'
+                )
+
+env.SharedLibrary('hello_ext', 'hello.cpp')
+</code></pre>
+
+<p><code>libs</code> (in line 1) stores the string that will tell SCons we are going to be looking for the boost_python compiled library when linking.</p>
+
+<p><code>libpath</code> is the path to those libraries.</p>
+
+<p><code>includes</code> Boost.Python will need access to <code>pyconfig.h</code> and other python C++ headers, which are located where your python install includes are. If you don’t include this directory, your build will break!</p>
+
+<p><code>frameworks = “Python”</code> Since we’re on a mac, we need to tell SCons to include the Python system framework while compiling.</p>
+
+<p>Now let me draw your attention to the line <code>SHLIBSUFFIX=‘.so’</code>. Python, when importing, expects either a <code>.py</code> file, or a <code>.so</code> file. The default mac extension for a shared library is <code>.dylib</code>. With this variable we are telling SCons to use the <code>.so</code> suffix instead of the default.</p>
+
+<p>Lastly, we use <code>env.SharedLibrary</code> to build the shared object file. It’s important that the name of the shared library be the same as the module name you told Boost.Python to give your module in the C++ file.</p>
+
+<p>That’s it! You should be able to properly build now.
+If you have any questions, feel free to leave a comment.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JSON to Python in an Object!]]></title>
+    <link href="http://murphyrandle.github.com/blog/2012/09/18/json-to-python-in-an-object/"/>
+    <updated>2012-09-18T10:36:00-06:00</updated>
+    <id>http://murphyrandle.github.com/blog/2012/09/18/json-to-python-in-an-object</id>
+    <content type="html"><![CDATA[<p>In order to get our object-oriented data back and forth between C++ and Python, my colleague and I decided to read / write JSON formatted text files.</p>
+
+<p> I&#8217;m a little picky when it comes to syntax and clarity. Python dictionaries, although well made, aren&#8217;t my favorite thing to use due to the extra brackets and characters needed to access their members.</p>
+
+<p>I wanted an easy want to turn my JSON file into a python object with <code>.</code> accessible attributes.</p>
+
+<p>With the help from (this question on SO)[http://stackoverflow.com/questions/3031219/python-recursively-access-dict-via-attributes-as-well-as-index-access] I customized this solution:</p>
+
+<script src="https://gist.github.com/3743805.js"> </script>
+
+
+<p></p>
+
+<p>The idea is that a JSON file from disk can be passed in to the constructer, and a new object will created with the members accessible  like this: <code>foo.bar</code> instead of like this: <code>foo['bar']</code>. If you find this useful, or you have a suggestion, leave a comment!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SCONS Change Build Executable]]></title>
+    <link href="http://murphyrandle.github.com/blog/2012/09/18/scons-change-build-executable/"/>
+    <updated>2012-09-18T10:34:00-06:00</updated>
+    <id>http://murphyrandle.github.com/blog/2012/09/18/scons-change-build-executable</id>
+    <content type="html"><![CDATA[<p>I really like the idea of <a href="http://www.scons.org">SCons</a> but in practice I tend to spend much more time searching for simple answers than I do getting work done. However, I think that some day I&#8217;ll understand enough that it&#8217;ll save me a lot of time.</p>
+
+<p>I&#8217;m working with a colleague on some research right now. He&#8217;s using gcc 4.7 because it supports the newer C++ standards.</p>
+
+<p>In order to compile  on my Mac, I had to first install gcc 4.7 through <a href="http://mxcl.github.com/homebrew/">homebrew</a> using this command:</p>
+
+<pre><code>brew install --enable-cxx https://raw.github.com/Homebrew/homebrew-dupes/master/gcc.rb  
+</code></pre>
+
+<p><a href="http://apple.stackexchange.com/questions/38222/how-do-i-install-gcc-via-homebrew">Instructions found on this thread</a></p>
+
+<p>This will install some new executables, <code>gcc-4.7</code> and <code>g++-4.7</code> being one of them.</p>
+
+<p>Now we need SCons to call 4.7 instead of Apple&#8217;s default old version. Thanks to kind souls on the Stack Exchange chat, I provide this command:</p>
+
+<pre><code>env = Environment(CXX = 'g++-4.7')  
+</code></pre>
+
+<p>Whatever command we type between those quotes will be what SCons passes to the shell as the compiler executable. In my case the env=Environment() was already called with a ton of arguments. I only wanted to change the compiler command for my particular platform, so I used the following lines:</p>
+
+<pre><code>if platform.system() == 'Darwin':
+        env['CXX'] = 'g++-4.7'
+        print "Running on a mac"
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Image Magick]]></title>
+    <link href="http://murphyrandle.github.com/blog/2012/08/08/image-magick/"/>
+    <updated>2012-08-08T14:41:00-06:00</updated>
+    <id>http://murphyrandle.github.com/blog/2012/08/08/image-magick</id>
+    <content type="html"><![CDATA[<p>Today I made an animated GIF as a UI element for a tool I’m working on.<br/>
+I really dislike crummy looking images, so I fiddled with ImageMagick until I found that the folling command  would build a satisfactory GIF:</p>
+
+<p><code>convert -loop 0 -quality 100 -delay 1 +dither -enhance *.jpg foo.gif</code></p>
+
+<p>The <code>+dither</code> will turn off dithering, this brings you a lot closer to your original image quality.<br/>
+I tried to find out how to set the frame rate as well, and the docs page says that the <code>-delay</code> option can be input in the following fashion: ticks/ticks-per-second. Idealy, this would allow me to set the frame rate to 60 FPS by entering the value: 1x60. However, experimentation yielded no different results than the default values.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FFMPEG Can Handle the Globs]]></title>
+    <link href="http://murphyrandle.github.com/blog/2012/08/03/ffmpeg-can-handle-the-globs/"/>
+    <updated>2012-08-03T22:51:00-06:00</updated>
+    <id>http://murphyrandle.github.com/blog/2012/08/03/ffmpeg-can-handle-the-globs</id>
+    <content type="html"><![CDATA[<p>Today at work I had to make a .webm file out of a sequince of images.<br/>
+Easy, right? Just use FFMPEG! Well, at first it wasn’t so easy due to two little things:</p>
+
+<ol>
+<li><p>I needed to be able to convert image sequences with variable frame padding around the numbers, and I didn’t have the time, or the desire to go and write a module to find all of the numbers in one of the filenames, and replce them with %d.</p></li>
+<li><p>The sequnce did not necessarily start at zero.<br/>
+As I tested, I got more and more frustrated, wondering if there really was no possible way to pass in something as simple as <code>image_*.jpg</code> and have it just work!</p></li>
+</ol>
+
+
+<p>All of the forum searching and stack-overflowing I did only fueled the frustration.<br/>
+Finally, as a last resort, I turned to the ffmpeg website documentation, where I found this:</p>
+
+<blockquote><p><a href="http://ffmpeg.org/ffmpeg.html">When importing an image sequence, -i also supports expanding shell-like wildcard patterns (globbing) internally. To lower the chance of interfering with your actual file names and the shell’s glob expansion, you are required to activate glob meta characters by prefixing them with a single % character, like in foo-%<em>.jpeg, foo-%?%?%?.jpeg or foo-00%[234%]%</em>.jpeg.</a></p></blockquote>
+
+<p>So, that’s it. <code>image_%*.jpg</code>! All I had to do was add a <code>%</code> before my <code>*</code>, and it worked just fine. It recognized all of my images, even though they did not start at 0, and I didn’t have to count the number of digits in the sequence.</p>
+
+<p>Manuals can be great sometimes.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+=======
+>>>>>>> Site updated at 2012-07-19 05:13:08 UTC
+    <title type="html"><![CDATA[Keep tabs on those joints]]></title>
+    <link href="http://murphyrandle.github.com/blog/2012/05/14/how-i-went-about-keeping-a-chain-of-joints-together/"/>
+    <updated>2012-05-14T10:22:00-06:00</updated>
+    <id>http://murphyrandle.github.com/blog/2012/05/14/how-i-went-about-keeping-a-chain-of-joints-together</id>
+    <content type="html"><![CDATA[<p>As a class assignment, I needed to program my own implementation of an inverse kinematics solver.<br/>
+In case you don&#8217;t know what on earth that is, watch this:</p>
+
+<iframe width="640" height="480" src="http://www.youtube.com/embed/euFe1S0OltQ" frameborder="0" allowfullscreen></iframe>
+
+
+<p>We were given the freedom to choose what tools we wanted to use in completing the assignment, and I chose to use my favorite open source package, Blender. (Plus, the added bonus that I got to use Python to program, instead of C#. My brain plays well with python.)</p>
+
+<p>In blender, it is easy to set up a parent / child relationship between objects. Whatever transform happens to the parent gets inherited by the child. I didn&#8217;t use that built-in system, however, because many of the students in the class were using a framework that included no such function. I wanted the practice of doing it myself.</p>
+
+<p>I had to do a little bit of trigonometry, and a little bit of recursion. In the end, however, the solution is pretty simple. We just need to follow a couple of rules:</p>
+
+<ul>
+<li>When a parent is rotated, the child receives the same rotation amount, applied in its own object space, that the parent does. (If I rotate the parent 20 degrees about the z axis, the child will also have those 20 degrees added to whatever its current rotation is.)</li>
+<li>The same rule applies to translation, and to scale. (I only implemented rotation and translation this time. I&#8217;ve heard it said that the first great virtue of every programmer is laziness.)</li>
+<li>If the child has children, each of these transforms must be propagated down the line.</li>
+</ul>
+
+
+<p><strong>Here&#8217;s the tricky part:</strong></p>
+
+<ul>
+<li>If a parent is rotated, both the translation and rotation of its child must be updated, as the child needs to stay attached to the end of the parent.</li>
+</ul>
+
+
+<p><strong>Quick note</strong>: I&#8217;m sorry I don&#8217;t have any pretty pictures to make this easy to understand. Let&#8217;s just call it an exercise in imagination and mental imaging. Also, just to clarify, I&#8217;m not going to explain how to set up the whole solver. This post is only explains how I did the parent-child relationship of joints.</p>
+
+<h2>Solving the tricky part:</h2>
+
+<p>Let&#8217;s take a scenario, and break it down.</p>
+
+<h4>Scenario:</h4>
+
+<p>Rotate the root of a three bone chain some positive angle about the Z axis.</p>
+
+<h4>Steps:</h4>
+
+<ol>
+<li>Rotate the root bone, just like we want.</li>
+<li>Use trigonometry to figure out the world coordinates of the end of the bone, where its child will sit:</li>
+</ol>
+
+
+<figure class='code'><figcaption><span>Pseudocode for finding endpoint.</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">X</span> <span class="o">=</span> <span class="n">WorldPositionOfRootBone</span> <span class="o">+</span> <span class="n">Length</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span>
+</span><span class='line'><span class="n">Y</span> <span class="o">=</span> <span class="n">WorldPositionOfRootBone</span> <span class="o">+</span> <span class="n">Length</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Move the child bone to that world location.</li>
+<li>Apply the same rotation to the child bone that was applied to the root bone.</li>
+</ol>
+
+
+<h4>Here&#8217;s where it gets interesting:</h4>
+
+<p><em>Note, the code you will see is Python 3, written for the Blender Game Engine using the Blender API. It&#8217;s not intended to be a complete example.</em></p>
+
+<p>Recursion can be either miraculous, or mind-busting. I often find it to be a little of both. We are going to use recursion in this circumstance, to make sure that all bones in the chain get updated correctly.</p>
+
+<p>In my implementation I made a new class for a joint, and I had each joint hold a pointer to its child. A little like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Joint</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">child</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">o</span> <span class="o">=</span> <span class="n">obj</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">child</span> <span class="o">=</span> <span class="n">child</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">length</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When the rotation method is called on the root bone, it goes through the process described above, but before end of the method for movement / orientation in a joint, a call is made to update the movement / orientation on its child, if any child exists. Like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">rotateRelative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rot</span><span class="p">):</span>
+</span><span class='line'>    <span class="bp">self</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">applyRotation</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rot</span><span class="p">])</span>
+</span><span class='line'>    <span class="bp">self</span><span class="o">.</span><span class="n">updateChildren</span><span class="p">(</span><span class="n">rot</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And this is what the <code>self.updateChildren()</code> method looks like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">updateChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="p">):</span>
+</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">updateChildRot</span><span class="p">(</span><span class="n">rot</span><span class="p">)</span>
+</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">updateChildPos</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This way, and time a bone is moved, it makes sure to move all of its children before finishing.
+Here&#8217;s a little video of how my robot arm turned out:</p>
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/MxWtpxjix-8" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Renderman Training Tidbits, No. 1]]></title>
+    <link href="http://murphyrandle.github.com/blog/2012/02/23/renderman-training-tidbits-no-1/"/>
+    <updated>2012-02-23T00:00:00-07:00</updated>
+    <id>http://murphyrandle.github.com/blog/2012/02/23/renderman-training-tidbits-no-1</id>
+    <content type="html"><![CDATA[<p>Here&#8217;s a video tutorial on attenuating lights with pre-calculated occlusion in RenderMan Studio 3.
+Thanks to Bert Poole and Chris Harvey for helping!</p>
+<<<<<<< HEAD
+
+<iframe width="1280" height="720" src="http://www.youtube.com/embed/kRHmGVViySw" frameborder="0" allowfullscreen></iframe>
+
+=======
+>>>>>>> Site updated at 2012-07-19 05:13:08 UTC
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Intermediate GNU Make tutorial.]]></title>
+    <link href="http://murphyrandle.github.com/blog/2011/10/21/intermediate-gnu-make-tutorial/"/>
+    <updated>2011-10-21T00:00:00-06:00</updated>
+    <id>http://murphyrandle.github.com/blog/2011/10/21/intermediate-gnu-make-tutorial</id>
+    <content type="html"><![CDATA[<p>When I was just starting to use GNU MAKE, I was frustrated out of my mind, trying to learn how to set up an efficient makefile for my small school project.</p>
+
+<p>The tutorials I found were either basic, or too in-depth. I found no help for a novice user. Eventually, I dug into the manual and spent a number of hours figuring out how to do what I wanted. Then I made this video, which gives a few hints on how to do some automation in your makefile, without using crazy wizard magic.</p>
+
+<h4>Disclaimer:</h4>
+
+<p>Please remember that this is not a bullet proof solution. After all, a novice came up with it. Nevertheless it worked fine for my small school assignment.</p>
+<<<<<<< HEAD
+
+<iframe width="960" height="720" src="http://www.youtube.com/embed/dqflr7_TqQ8" frameborder="0" allowfullscreen></iframe>
+
+=======
+>>>>>>> Site updated at 2012-07-19 05:13:08 UTC
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Google Voice texting tool.]]></title>
+    <link href="http://murphyrandle.github.com/blog/2011/08/24/google-voice-texting-tool/"/>
+    <updated>2011-08-24T00:00:00-06:00</updated>
+    <id>http://murphyrandle.github.com/blog/2011/08/24/google-voice-texting-tool</id>
+    <content type="html"><![CDATA[<p>My wife and I sometime volunteer to be leaders for the new students at our university. Since we need to contact 30 students at a time, and they all have cell phones, texting is the way to go.  The problem is that it seems like most cell phone carriers (including google voice) don&#8217;t allow sending an SMS to more than about five people at once (to reduce spam?). Here&#8217;s the script I wrote to get around that:</p>
+
+<h2>Google Voice, a marvelous tool:</h2>
+
+
+<p>If you haven&#8217;t checked out <a href="http://voice.google.com">Google Voice</a> yet, I highly recommend doing so. Google Voice provides Free SMS plus a number of other features. I use SMS most regularly though. I love the ease with which I can view and compose text messages right from the browser. It does require that you sign up for a new free number. I did that a year ago, and I just give people my google number now, which forwards to my cell number.</p>
+
+<p>Google voice in the browser will not let you send an SMS to more than five people at once, so here&#8217;s where I had to turn to:</p>
+
+<h2>pygooglevoice</h2>
+
+
+<p><a href="http://code.google.com/p/pygooglevoice/">pygooglevoice</a> is a python API for google voice. This means that I can use the functions that GV offers without having to use their interface. It means that I can use them from a script, which is MUCH more convenient for mass operations.</p>
+
+<p>To install it on mac os X, i just opened the terminal and run this command:</p>
+
+<pre class="syntax {bash}">sudo easy_install -U pygooglevoice</pre>
+
+
+<p>&nbsp;</p>
+
+<p><a href="http://snipt.net/murphyspublic/send-sms-using-google-voice/">and then I wrote this little script to be able to send texts to a list of people. The cool thing is that if you type &#8220;NAME&#8221; in all caps in the body of the text, it will be replaced by the name of the person who is being texted.</a></p>
+
+<p>&nbsp;</p>
+]]></content>
+  </entry>
+  
+</feed>
