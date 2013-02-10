@@ -92,14 +92,15 @@ end
 desc "Begin a new post in #{source_dir}/#{posts_dir}"
 task :new_post, :title do |t, args|
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
-  mkdir_p "#{source_dir}/#{posts_dir}"
+  mkdir_p "#{source_dir}/#{posts_dir}", :verbose => false
   args.with_defaults(:title => 'new-post')
   title = args.title
   filename = "#{source_dir}/#{posts_dir}/#{Time.now.strftime('%Y-%m-%d')}-#{title.to_url}.#{new_post_ext}"
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
-  puts "Creating new post: #{filename}"
+  # puts "Creating new post: #{filename}"
+  puts "#{filename}"
   open(filename, 'w') do |post|
     post.puts "---"
     post.puts "layout: post"
