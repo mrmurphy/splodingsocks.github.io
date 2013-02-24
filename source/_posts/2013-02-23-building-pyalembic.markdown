@@ -24,7 +24,7 @@ I'm using zsh here. The commands that I write will be slightly different from ba
 If you haven't learned the joys of zsh, I suggest you do.
 I also suggest you check out [yadr](https://github.com/skwp/dotfiles)
 
-# 1. Build Boost
+# Build Boost
 I chose to use Boost 1.44 because that's the minimum required version from the Alembic source readme.
 
 Download the source, `cd` into the directory, and run these commands with me :
