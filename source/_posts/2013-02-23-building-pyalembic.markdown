@@ -3,7 +3,7 @@ layout: post
 title: "Building PyAlembic"
 date: 2013-02-23 23:09
 comments: true
-categories: 
+categories: howto, building
 ---
 
 This is going to be a messy one.
