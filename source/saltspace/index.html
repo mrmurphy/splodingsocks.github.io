@@ -1,0 +1,154 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" itemscope itemtype="http://schema.org/Product"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+    More info: h5bp.com/b/378 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Gumby - A Flexible, Responsive CSS Framework - Powered by SASS</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="humans.txt">
+
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+
+    <!-- Facebook Metadata /-->
+    <meta property="fb:page_id" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:description" content=""/>
+    <meta property="og:title" content=""/>
+
+    <!-- Google+ Metadata /-->
+    <meta itemprop="name" content="">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <!-- We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
+    However, there is a blank style.css in the css directory should you prefer -->
+    <link rel="stylesheet" href="css/gumby.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+    <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+     <div class="row">
+       <div class="twelve columns special head">
+        <img src="img/SitStandLove.png">
+        <!-- <h2>Salt Space - Sit, Stand, Love.</h2> -->
+        <h1>Salt Space</h1><h2>the surface that loves freedom as much as you do</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="twelve columns centered">
+        <p>Here at Salt we're developing a new work surface. One that will allow you to stand up, sit down, squat, or dance at will. If your back hurts from sitting at your desk all day, if you have a crick in your neck, or if your shoulders are driving your crazy, let us know! We want to help make it better. 
+        </div>
+      </div>
+
+      <div class="valign row colored">
+        <div>
+          <p>Follow us on Twitter!</p>
+        </div>
+        <div class="contentright">
+            <div class="large metro rounded btn primary"><a href="https://twitter.com/saltspaceco">Follow @saltspaceco</a></div>
+        </div>
+      </div>
+
+      <div class="valign row colored">
+        <div>
+          <p>Or you can enter your email. We promise we won't share it with anyone, and we won't send you junk.<p>
+        </div>
+        <div>
+
+        <form action="MAILTO:murphyspublic@gmail.com" method="GET" enctype="text/plain">
+         <div class="row">
+          <ul>
+            <li class=​"append field"><li class="append field">
+              <input class="wide email input" type="email" placeholder="Email input">
+              <div class="medium primary btn"><a href="#">Go</a></div>
+            </li></li>
+          </ul>
+        </div>
+      </form>
+
+
+        </div>
+      </div>
+
+        <div class="row foot">
+          <div class="twelve columns centered">
+           <div class="four columns">
+            <h2>Inexpensive</h2>
+            <p>How will you know if you like to stand if you can't afford to try it seriously? We're working with basic, inexpensive materials so that you don't have to give us your entire wallet.</p>
+          </div>
+          <div class="four columns">
+            <h2>Strong</h2>
+            <p>We know you have multiple monitors, some books, and pictures of your family on your desk. We'll make it strong enough for most everything you throw on it (except maybe a dance party).</p>
+          </div>
+          <div class="four columns">
+            <h2>Adjustable</h2>
+            <p>Nobody wants to stand up all of the time. We know you need variety. Our bodies are made to move. Desks should move too.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div> <!--! end of #container -->
+
+  </section>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+
+  <!--
+  Include gumby.js followed by UI modules.
+  Or concatenate and minify into a single file
+  <script src="js/libs/gumby.js"></script>
+  <script src="js/libs/ui/gumby.retina.js"></script>
+  <script src="js/libs/ui/gumby.fixed.js"></script>
+  <script src="js/libs/ui/gumby.skiplink.js"></script>
+  <script src="js/libs/ui/gumby.toggleswitch.js"></script>
+  <script src="js/libs/ui/gumby.checkbox.js"></script>
+  <script src="js/libs/ui/gumby.radiobtn.js"></script>
+  <script src="js/libs/ui/gumby.tabs.js"></script>
+  <script src="js/libs/ui/jquery.validation.js"></script>
+-->
+<script src="js/libs/gumby.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Change UA-XXXXX-X to be your site's ID -->
+<script>
+window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+Modernizr.load({
+  load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+});
+</script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+  chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+    <![endif]-->
+
+  </body>
+  </html>

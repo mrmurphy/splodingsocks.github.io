@@ -1,0 +1,102 @@
+// Your custom SCSS should be written here...
+
+@import url(http://fonts.googleapis.com/css?family=Leckerli+One);
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,200);
+
+@mixin shadowbox {
+  box-shadow:     0 1px 0 hsl(174,5%,80%),
+                     0 2px 0 hsl(174,5%,75%),
+                     0 3px 0 hsl(174,5%,70%),
+                     0 4px 0 hsl(174,5%,66%),
+                     0 5px 0 hsl(174,5%,64%),
+                     0 6px 0 hsl(174,5%,62%),
+                     0 7px 0 hsl(174,5%,61%),
+                     0 8px 0 hsl(174,5%,60%),
+    
+                     0 0 5px rgba(0,0,0,.05),
+                    0 1px 3px rgba(0,0,0,.2),
+                    0 3px 5px rgba(0,0,0,.2),
+                   0 5px 10px rgba(0,0,0,.2),
+                  0 10px 10px rgba(0,0,0,.2),
+                  0 20px 20px rgba(0,0,0,.3);
+}
+
+$fancyfont: "Leckerli One";
+$headerfont: "Yanone Kaffeesatz";
+$primarycolor: #CBE86B;
+
+html, body {
+    background: #FFFFFF;
+}
+
+h2 {
+    font-family: $headerfont;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+.head {
+    text-align: center;
+    h1 {
+        font: 5em bold $headerfont;
+        margin-bottom: -10px;
+        padding-bottom: 0px;
+    }
+    h2 {
+        margin-top: 0px;
+        padding-top: 0px;
+        font-size: 2.5em;
+        font-weight: lighter;
+    }
+    img {
+        padding-top: 80px;
+    }
+    margin-bottom: 80px;
+}
+
+.foot {
+    margin-top: 40px;
+    height: 500px;
+    h2{
+        text-align: center;
+    }
+}
+
+.contentcentered{
+    text-align: center;
+}
+
+.contentright {
+    text-align: right;
+}
+
+.row {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.colored {
+    background: $primarycolor;
+    @include border-radius(8px, 8px);
+    padding: 20px;
+    // @include shadowbox();
+    font: 1.2em bold $headerfont;
+    margin-bottom: 40px;
+    margin-top: 40px;
+
+    li.append.field{
+        margin: 0px;
+    }
+    ul {
+        margin: 0px;
+    }
+}
+
+p {
+    margin: 0px;
+}
+
+.btn.formbutton {
+}
