@@ -4,6 +4,7 @@ title: "Ubuntu 12.10 on VirtualBox"
 date: 2013-03-14 19:21
 comments: true
 categories: 
+published: false
 ---
 
 Links:
