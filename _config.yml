@@ -4,7 +4,7 @@ permalink: /posts/:title
 rdiscount:
   extensions: [smart]
 title : Murphy Randle
-production_url : http://murphyrandle.github.io
+production_url : http://www.murphyrandle.com
 description: "Articles about Web engineering and software development by Murphy Randle"
 disqus_shortname: murphyrandle
 analytics: UA-1919368-1
