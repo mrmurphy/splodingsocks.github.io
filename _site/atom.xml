@@ -4,7 +4,7 @@
  <title>Murphy Randle</title>
  <link href="http://www.murphyrandle.com/atom.xml" rel="self"/>
  <link href="http://www.murphyrandle.com/"/>
- <updated>2013-12-06T09:53:28-07:00</updated>
+ <updated>2013-12-06T11:04:54-07:00</updated>
  <id>http://www.murphyrandle.com</id>
  <author>
    <name>Murphy J.C. Randle</name>
@@ -179,8 +179,8 @@ python setup.py install
 
 &lt;p&gt;Here&amp;rsquo;s where we do some more magic. Download and extract pyilmbase &lt;a href=&quot;http://www.openexr.com/downloads.html&quot;&gt;from the web site&lt;/a&gt;.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;# Build pyilmbase (I&#39;ve already extracted it)
-cd pyilmbase-1.0.0 #Or whatever version you&#39;ve downloaded.
+&lt;pre&gt;&lt;code&gt;# Build pyilmbase (I've already extracted it)
+cd pyilmbase-1.0.0 #Or whatever version you've downloaded.
 export CPPFLAGS=&quot;-I/usr/local/lib/python2.7/site-packages/numpy/core/include/&quot;
 ./configure --with-boost-include-dir=/usr/local/include/boost-1_44/ --with-boost-lib-dir=/usr/local/lib --with-boost-python-libname=boost_python-mt-1_44
 make
@@ -333,11 +333,11 @@ env = Environment(
                   LIBS = libs,
                   LIBPATH = libpath,
                   FRAMEWORKS = frameworks,
-                  SHLIBPREFIX = &#39;&#39;,
-                  SHLIBSUFFIX = &#39;.so&#39;
+                  SHLIBPREFIX = '',
+                  SHLIBSUFFIX = '.so'
                 )
 
-env.SharedLibrary(&#39;hello_ext&#39;, &#39;hello.cpp&#39;)
+env.SharedLibrary('hello_ext', 'hello.cpp')
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;code&gt;libs&lt;/code&gt; (in line 1) stores the string that will tell SCons we are going to be looking for the boost_python compiled library when linking.&lt;/p&gt;
@@ -375,7 +375,7 @@ If you have any questions, feel free to leave a comment.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
 
-&lt;p&gt;The idea is that a JSON file from disk can be passed in to the constructer, and a new object will created with the members accessible  like this: &lt;code&gt;foo.bar&lt;/code&gt; instead of like this: &lt;code&gt;foo[&#39;bar&#39;]&lt;/code&gt;. If you find this useful, or you have a suggestion, leave a comment!&lt;/p&gt;
+&lt;p&gt;The idea is that a JSON file from disk can be passed in to the constructer, and a new object will created with the members accessible  like this: &lt;code&gt;foo.bar&lt;/code&gt; instead of like this: &lt;code&gt;foo['bar']&lt;/code&gt;. If you find this useful, or you have a suggestion, leave a comment!&lt;/p&gt;
 </content>
  </entry>
  
@@ -399,13 +399,13 @@ If you have any questions, feel free to leave a comment.&lt;/p&gt;
 
 &lt;p&gt;Now we need SCons to call 4.7 instead of Apple&amp;rsquo;s default old version. Thanks to kind souls on the Stack Exchange chat, I provide this command:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;env = Environment(CXX = &#39;g++-4.7&#39;)  
+&lt;pre&gt;&lt;code&gt;env = Environment(CXX = 'g++-4.7')  
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Whatever command we type between those quotes will be what SCons passes to the shell as the compiler executable. In my case the env=Environment() was already called with a ton of arguments. I only wanted to change the compiler command for my particular platform, so I used the following lines:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;if platform.system() == &#39;Darwin&#39;:
-        env[&#39;CXX&#39;] = &#39;g++-4.7&#39;
+&lt;pre&gt;&lt;code&gt;if platform.system() == 'Darwin':
+        env['CXX'] = 'g++-4.7'
         print &quot;Running on a mac&quot;
 &lt;/code&gt;&lt;/pre&gt;
 </content>
