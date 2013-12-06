@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Building PyAlembic</title>
+
+  <meta name="author" content="Murphy J.C. Randle" />
+  <meta name="description" content="Articles about Web engineering and software development by Murphy Randle" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="alternate" type="application/rss+xml" href="/atom.xml" />
+
+  <link href="/css/up.css" rel="stylesheet">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-57x57-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-fixed-top navbar-default navbar-blog" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-pages">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Murphy Randle</a>
+  </div>
+
+  <div class="collapse navbar-collapse navbar-pages">
+    <ul class="nav navbar-nav navbar-right hidden-print thin">
+      <li>
+        <a class="hidden-xs" href="http://github.com/caarlos0/up"
+        title="Get this theme!">
+        <i class="icon-download icon-large"></i>
+      </a>
+      <a class="visible-xs" href="http://github.com/caarlos0/up"
+      title="Get this theme!">
+      <i class="icon-download icon-large"></i> Get this theme!
+    </a>
+  </li>
+  <li>
+    <a class="hidden-xs" title="About me" href="/about">
+      <i class="icon-user icon-large"></i>
+    </a>
+    <a class="visible-xs" title="About me" href="/about">
+      <i class="icon-user icon-large"></i> About me
+    </a>
+  </li>
+  <li>
+    <a class="hidden-xs" href="/atom.xml" title="Atom Feed">
+      <i class="icon-rss icon-large"></i>
+    </a>
+    <a class="visible-xs" href="/atom.xml" title="Atom Feed">
+      <i class="icon-rss icon-large"></i> Atom Feed
+    </a>
+  </li>
+</ul>
+</div>
+</nav>
+
+
+  <div class="container">
+    <article>
+  <h1>
+    <a href="/posts/building-pyalembic">Building PyAlembic</a>
+  </h1>
+
+  <section class="byline">
+    February 23, 2013
+  </section>
+
+  <p>This is going to be a messy one.</p>
+
+<p>I wrote some of the code for my colleague&rsquo;s thesis using the Alembic IO libraries from <a href="http://alembic.io/">Imageworks</a>. Trying to build on Windows was a nightmare for me. I don&rsquo;t understand the Windows world almost at all. You can imagine how relieved I was to find <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">Christoph Gohlke&rsquo;s unofficial builds</a> where I was able to download an executable installer for Windows 7, and I was set to go right away.</p>
+
+<p>However, those are the libraries for PyAlembic, and I had written the code for the thesis in C++. Why did I do this? Precisely because I had previously failed to build the pyalembic libraries on the mac. But there I was, back to the challenge.</p>
+
+<p>I&rsquo;m pleased to say that I succeeded, but only after stumbling my way through a lot of confusion. I&rsquo;ve taken notes on what I did to get it built, so I&rsquo;ll note them down here.</p>
+
+<h1>Preamble</h1>
+
+<p>I&rsquo;m running on OS X 10.8.2, and I love <a href="http://mxcl.github.com/homebrew/">brew</a>, so I used that to install a new version of Python. By the way, I didn&rsquo;t learn this until recently, brew can install Python as a linuxy, non-framework setup, or as a macish framework. It says it all here <a href="http://docs.python-guide.org/en/latest/starting/install/osx/">on the python guide</a>.</p>
+
+<p>Follow that guide to install python as a framework using brew.</p>
+
+<p>I&rsquo;m using zsh here. The commands that I write will be slightly different from bash and csh syntax. I&rsquo;ve adapted them to work well with zsh.</p>
+
+<p>If you haven&rsquo;t learned the joys of zsh, I suggest you do.
+I also suggest you check out <a href="https://github.com/skwp/dotfiles">yadr</a></p>
+
+<h1>Build Boost</h1>
+
+<p>I chose to use Boost 1.44 because that&rsquo;s the minimum required version from the Alembic source readme.</p>
+
+<p>Download the source, <code>cd</code> into the directory, and run these commands with me :</p>
+
+<pre><code>export CXXFLAGS="-fPIC"
+export CFLAGS="-fPIC"
+export LDFLAGS="-fPIC"
+umask 022
+./bootstrap.sh --with-libraries=program_options --with-libraries=thread --with-libraries=python
+# Change to not include the compiler name somehow?
+sudo ./bjam install --layout=versioned link=static threading=multi cxxflags=-fPIC
+cd /usr/local/include/boost-1_44
+sudo chmod -R a+r .
+</code></pre>
+
+<p>Okay, there&rsquo;s something extra here that I don&rsquo;t understand very well. For me, the compiled libraries had something that looked like the compiler name tacked on to the library name. That made it impossible for CMake (which we&rsquo;ll use later) to auto-locate the Boost libraries. So go ahead and find the three files we built. They will look something like this:</p>
+
+<pre><code>libboost_foo-mt-****-1_44.a
+</code></pre>
+
+<p>Get rid of whatever those stars represent. In the end, all three of your libraries should look like this:</p>
+
+<pre><code>libboost_foo-mt-1_44.a
+</code></pre>
+
+<p>Where <code>foo</code> is the name of the library (python, thread, etc&hellip;) and 1_44 is the version of Boost that you&rsquo;ve built.</p>
+
+<p>next:</p>
+
+<pre><code>popd
+cd ../
+</code></pre>
+
+<p>to get back to the parent directory of the boost source and it&rsquo;s time for&hellip;</p>
+
+<h1>Numpy</h1>
+
+<p>This is how I got numpy to work:</p>
+
+<pre><code>git clone https://github.com/numpy/numpy.git
+cd numpy
+python setup.py build
+python setup.py install
+</code></pre>
+
+<p>Pretty straightforward.</p>
+
+<h1>ILMBase</h1>
+
+<p>I didn&rsquo;t have a problem building ILMBase. I hope you don&rsquo;t either. I&rsquo;m leaving it out of this guide, but it&rsquo;s very important that you build it before moving on.</p>
+
+<h1>HDF5</h1>
+
+<p>Same thing with HDF5. I think I installed it with Homebrew.</p>
+
+<h1>Other dependencies?</h1>
+
+<p>I didn&rsquo;t have a problem finding or building the other dependencies. Make sure you look them up in the README and that you have them installed.</p>
+
+<h1>pyilmbase</h1>
+
+<p>Here&rsquo;s where we do some more magic. Download and extract pyilmbase <a href="http://www.openexr.com/downloads.html">from the web site</a>.</p>
+
+<pre><code># Build pyilmbase (I've already extracted it)
+cd pyilmbase-1.0.0 #Or whatever version you've downloaded.
+export CPPFLAGS="-I/usr/local/lib/python2.7/site-packages/numpy/core/include/"
+./configure --with-boost-include-dir=/usr/local/include/boost-1_44/ --with-boost-lib-dir=/usr/local/lib --with-boost-python-libname=boost_python-mt-1_44
+make
+make install
+</code></pre>
+
+<p>Okay, if that has worked, now we can move on to the heavy hitter&hellip;</p>
+
+<h1>Alembic and pyalembic</h1>
+
+<pre><code># Build Alembic:
+curl http://alembic.googlecode.com/files/Alembic_1.1.3_2013021100.tgz &gt; Alembic.tgz
+tar -xvf Alembic.tgz
+</code></pre>
+
+<p>Change into the extracted alembic source dir.</p>
+
+<p>If you want to, you can rebuilt your <code>locate</code> database before bootstrapping, but since we&rsquo;ll be feeding almost everything in by hand on the command line, I wouldn&rsquo;t worry about it. I&rsquo;ve included the command to do so here for future reference, however.</p>
+
+<pre><code># Rebuild the `locate` library used for finding headers, etc...
+# sudo /usr/libexec/locate.updatedb
+</code></pre>
+
+<p>K, here&rsquo;s where it got a little hairy.
+I had to edit <code>Python/PyAlembic/CMakeLists.txt</code> to reflect the structure of the python installation on my disk.</p>
+
+<p>I will leave that up to you, as it&rsquo;s a little more detailed than I want to write currently. I found the CMake GUI tool useful at this point, as I could try and run the configuration repeatedly, and fix whatever was failing as I went along.</p>
+
+<p>If you don&rsquo;t change the CMakeLists file, you&rsquo;ll likely run into a &ldquo;python libraries not found&rdquo; CMake configuration error.</p>
+
+<p>If you can&rsquo;t figure this out, leave a comment below and I&rsquo;ll be happy to try and help.</p>
+
+<p>Once you&rsquo;ve got the correct paths to python set up in the cmake file, we have to do one more thing.</p>
+
+<p>For some reason, the cmake files in this project use the cmake variable <code>BOOST_PYTHON_LIBRARY</code> but my build wasn&rsquo;t happy until I did a search and replace through the whole source project, changing it to: <code>Boost_PYTHON_LIBRARY</code>. I did that using the wonderful search and replace feature of Sublime Text 2.</p>
+
+<p>Now, we should be able to run the bootstrap command:</p>
+
+<pre><code>python build/bootstrap/alembic_bootstrap.py \
+--dependency-install-root=/usr/local/ \
+--hdf5_include_dir=/usr/local/include/ \
+--hdf5_hdf5_library=/usr/local/lib/libhdf5.a \
+--ilmbase_include_dir=/usr/local/include/OpenEXR/ \
+--ilmbase_imath_library=/usr/local/lib/libImath.a \
+--pyilmbase_include_dir=/usr/local/include/OpenEXR/ \
+--pyilmbase_pyimath_library=/usr/local/lib/libPyImath.1.0.0.dylib \
+--pyilmbase_pyimath_module=/usr/local/lib/python2.7/site-packages/imathmodule.so \
+--boost_include_dir=/usr/local/include/boost-1_44/ \
+--boost_thread_library=/usr/local/lib/libboost_thread-mt-1_44.a \
+--boost_python_library=/usr/local/lib/libboost_python-mt-1_44.a \
+--zlib_include_dir=/usr/include/ \
+--zlib_library=/usr/lib/libz.1.2.5.dylib \
+--enable-pyalembic \
+../alembic_build
+</code></pre>
+
+<p>Look at all of those nasty parameters. You may have to adapt some of those paths to your fit your system layout.</p>
+
+<p>Now:</p>
+
+<pre><code>cd ../alembic_build        #go to the build directory
+make -j8                   #to build with eight cores. Adjust this number accordingly.
+make install               #this will build the alembic libraries.
+cd python
+make
+make install
+</code></pre>
+
+<p>At this point, I had to <code>cd</code> to <code>/usr/local/alembic-1.1.3/lib/</code> and there I found two libraries: alembicglmodule.dylib, and alembicmodule.dylib</p>
+
+<p>I don&rsquo;t know why these came out as <code>dylib</code>s instead of <code>so</code>s. So just copy them to your python <code>site-packages</code> folder, and rename them with the extension <code>.so</code> instead of <code>.dylib</code></p>
+
+<p>Then, pop open python and</p>
+
+<pre><code>import imath
+import alembic
+</code></pre>
+
+<p>It&rsquo;s important to note that you may always have to import imath BEFORE importing alembic. When I didn&rsquo;t, I got the error:</p>
+
+<pre><code>TypeError: No Python class registered for C++ class PyImath::FixedArray&lt;unsigned char&gt;
+</code></pre>
+
+<p><a href="https://groups.google.com/forum/?fromgroups=#!topic/alembic-discussion/iqo1MKE4kyc">See my post on the alembic group for more info</a></p>
+
+<p>That&rsquo;s the distilled version of what I did over the past week or so to get this built.</p>
+
+<p>Whew.</p>
+
+  <div class="pull"></div>
+  <a  href="https://twitter.com/share" class="twitter-share-button"
+data-via="murphsalot" data-lang="en" data-size="large">Tweet</a>
+<script>
+!function(d,s,id){
+  var js,fjs=d.getElementsByTagName(s)[0];
+  if(!d.getElementById(id)){
+    js=d.createElement(s);
+    js.id=id;
+    js.src="//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js,fjs);
+  }
+}(document,"script","twitter-wjs");
+</script>
+
+  <hr>
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'murphyrandle';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</article>
+
+  </div>
+
+  <div id="footer" class="hidden-print">
+  <section class="meta">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-lg-offset-4">
+          <a href="https://twitter.com/murphsalot">
+            <i class="icon icon-twitter icon-4x"></i>
+            <div>Follow me on Twitter.</div>
+          </a>
+        </div>
+        <div class="col-lg-2 next">
+          <a href="https://github.com/murphyrandle">
+            <i class="icon icon-github icon-4x"></i>
+            <div>
+              See my github profile.
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+  
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1919368-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
+
+  
+
+</body>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="/js/up.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300'
+  rel='stylesheet' type='text/css'>
+</html>

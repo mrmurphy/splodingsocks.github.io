@@ -1,0 +1,16 @@
+markdown: rdiscount
+pygments: true
+permalink: /posts/:title
+rdiscount:
+  extensions: [smart]
+title : Murphy Randle
+production_url : http://murphyrandle.com
+description: "Articles about Web engineering and software development by Murphy Randle"
+disqus_shortname: murphyrandle
+analytics: UA-1919368-1
+gauges: 
+author :
+  name : Murphy J.C. Randle
+  github : murphyrandle
+  twitter : murphsalot
+  email: murphyspublic@gmail.com

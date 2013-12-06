@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Murphy Randle</title>
+ <link href="http://murphyrandle.com/atom.xml" rel="self"/>
+ <link href="http://murphyrandle.com/"/>
+ <updated>2013-12-05T23:02:33-07:00</updated>
+ <id>http://murphyrandle.com</id>
+ <author>
+   <name>Murphy J.C. Randle</name>
+ </author>
+
+ 
+ <entry>
+   <title>nth-of-type woes.</title>
+   <link href="http://murphyrandle.com/posts/nth-of-type"/>
+   <updated>2013-07-17T12:47:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/nth-of-type</id>
+   <content type="html">&lt;h1&gt;What on earth, CSS?&lt;/h1&gt;
+
+&lt;p&gt;Css can be a real bummer. But learning the specific rules helps.
+Here&amp;rsquo;s a little trick to help with the nth-of-type selector:&lt;/p&gt;
+
+&lt;p&gt;Say you have markup that looks something like this (haml)&lt;/p&gt;
+
+&lt;p&gt;```
+.wrapper&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;.bob
+.entry
+    one
+.entry
+    two
+.entry
+    three
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;It makes sense to me that: &lt;code&gt;div.entry:nth-of-type(1)&lt;/code&gt; would select the div that says &amp;ldquo;one&amp;rdquo;. In reality, it won&amp;rsquo;t select anything, since .bob is the first child of .wapper (the parent of all of the divs). I won&amp;rsquo;t rehash the rules here, &lt;a href=&quot;http://css-tricks.com/the-difference-between-nth-child-and-nth-of-type&quot;&gt;since Chris Coyier did such a smashing job with his blog post.&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A trick to help this work in a more expected way is to wrap those &lt;code&gt;.entry&lt;/code&gt;s into their own parent:&lt;/p&gt;
+
+&lt;p&gt;```
+.wrapper&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;.bob
+.entries
+    .entry
+        one
+    .entry
+        two
+    .entry
+        three
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;And then the div with &amp;ldquo;one&amp;rdquo; will be selected.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Heroku pushes from master</title>
+   <link href="http://murphyrandle.com/posts/heroku-slash-pushes-slash-from-slash-master"/>
+   <updated>2013-05-18T14:22:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/heroku-slash-pushes-slash-from-slash-master</id>
+   <content type="html">&lt;p&gt;Such a small mistake can cost so many hours.&lt;/p&gt;
+
+&lt;p&gt;I was trying to push a rails app to Heroku recently, and I got the error &lt;code&gt;Could not find bootstrap-sass-2.3.1.1 in any of the sources&lt;/code&gt;. So I changed my gemfile to point to &lt;code&gt;bootstrap-sass-2.3.1.1&lt;/code&gt;, ran &lt;code&gt;bundle update&lt;/code&gt; and committed.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the mistake.&lt;/p&gt;
+
+&lt;p&gt;I did this on the &lt;code&gt;dev&lt;/code&gt; branch, and then typed &lt;code&gt;git push heroku master&lt;/code&gt; expecting that my current branch, &lt;code&gt;dev&lt;/code&gt; would be pushed to Heroku and be merged with master up there. Not the way I would normally work, but I was making some quick iterations, and wanted to see the results without having to merge from dev every time.&lt;/p&gt;
+
+&lt;p&gt;The problem is that even though I expected dev to be pushed, my unchanged master was getting pushed every time.&lt;/p&gt;
+
+&lt;p&gt;According to the &lt;a href=&quot;https://devcenter.heroku.com/articles/git&quot;&gt;Heroku docs&lt;/a&gt; to push from the dev branch, the correct command would be: &lt;code&gt;git push heroku dev:master&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s it!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Linking order matters</title>
+   <link href="http://murphyrandle.com/posts/linking-order-matters"/>
+   <updated>2013-03-28T19:08:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/linking-order-matters</id>
+   <content type="html">&lt;p&gt;The saga continues with building Alembic.&lt;/p&gt;
+
+&lt;p&gt;We deciced to switch from a windows priority build to a linux only build for the project I&amp;rsquo;m currently working on.&lt;/p&gt;
+
+&lt;p&gt;This meant that I had to take Alembic (which I&amp;rsquo;d finally gotten working on Mac OS X) and compile it in Ubuntu. It wasn&amp;rsquo;t bad, actually. The build process was mostly painless. My excitement ramped up as I ran the first test build after installing all dependencies. To my dismay, I hit a bunch of linker errors.&lt;/p&gt;
+
+&lt;p&gt;It turns out I had all of the libraries linked in the wrong order. I didn&amp;rsquo;t even know that linking order matters. But when building the command for the linker we want to make sure we list the libraries that we&amp;rsquo;re going to link to in order from most dependent to least dependent. That&amp;rsquo;s just how it goes.&lt;/p&gt;
+
+&lt;p&gt;Once I got all of my libraries in the correct order, and I added in pthread (which wasn&amp;rsquo;t needed on OS X, but is needed on linux) I was able to build.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Building PyAlembic</title>
+   <link href="http://murphyrandle.com/posts/building-pyalembic"/>
+   <updated>2013-02-23T23:09:00-07:00</updated>
+   <id>http://murphyrandle.com/posts/building-pyalembic</id>
+   <content type="html">&lt;p&gt;This is going to be a messy one.&lt;/p&gt;
+
+&lt;p&gt;I wrote some of the code for my colleague&amp;rsquo;s thesis using the Alembic IO libraries from &lt;a href=&quot;http://alembic.io/&quot;&gt;Imageworks&lt;/a&gt;. Trying to build on Windows was a nightmare for me. I don&amp;rsquo;t understand the Windows world almost at all. You can imagine how relieved I was to find &lt;a href=&quot;http://www.lfd.uci.edu/~gohlke/pythonlibs/&quot;&gt;Christoph Gohlke&amp;rsquo;s unofficial builds&lt;/a&gt; where I was able to download an executable installer for Windows 7, and I was set to go right away.&lt;/p&gt;
+
+&lt;p&gt;However, those are the libraries for PyAlembic, and I had written the code for the thesis in C++. Why did I do this? Precisely because I had previously failed to build the pyalembic libraries on the mac. But there I was, back to the challenge.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m pleased to say that I succeeded, but only after stumbling my way through a lot of confusion. I&amp;rsquo;ve taken notes on what I did to get it built, so I&amp;rsquo;ll note them down here.&lt;/p&gt;
+
+&lt;h1&gt;Preamble&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;m running on OS X 10.8.2, and I love &lt;a href=&quot;http://mxcl.github.com/homebrew/&quot;&gt;brew&lt;/a&gt;, so I used that to install a new version of Python. By the way, I didn&amp;rsquo;t learn this until recently, brew can install Python as a linuxy, non-framework setup, or as a macish framework. It says it all here &lt;a href=&quot;http://docs.python-guide.org/en/latest/starting/install/osx/&quot;&gt;on the python guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Follow that guide to install python as a framework using brew.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m using zsh here. The commands that I write will be slightly different from bash and csh syntax. I&amp;rsquo;ve adapted them to work well with zsh.&lt;/p&gt;
+
+&lt;p&gt;If you haven&amp;rsquo;t learned the joys of zsh, I suggest you do.
+I also suggest you check out &lt;a href=&quot;https://github.com/skwp/dotfiles&quot;&gt;yadr&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1&gt;Build Boost&lt;/h1&gt;
+
+&lt;p&gt;I chose to use Boost 1.44 because that&amp;rsquo;s the minimum required version from the Alembic source readme.&lt;/p&gt;
+
+&lt;p&gt;Download the source, &lt;code&gt;cd&lt;/code&gt; into the directory, and run these commands with me :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export CXXFLAGS=&quot;-fPIC&quot;
+export CFLAGS=&quot;-fPIC&quot;
+export LDFLAGS=&quot;-fPIC&quot;
+umask 022
+./bootstrap.sh --with-libraries=program_options --with-libraries=thread --with-libraries=python
+# Change to not include the compiler name somehow?
+sudo ./bjam install --layout=versioned link=static threading=multi cxxflags=-fPIC
+cd /usr/local/include/boost-1_44
+sudo chmod -R a+r .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Okay, there&amp;rsquo;s something extra here that I don&amp;rsquo;t understand very well. For me, the compiled libraries had something that looked like the compiler name tacked on to the library name. That made it impossible for CMake (which we&amp;rsquo;ll use later) to auto-locate the Boost libraries. So go ahead and find the three files we built. They will look something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;libboost_foo-mt-****-1_44.a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Get rid of whatever those stars represent. In the end, all three of your libraries should look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;libboost_foo-mt-1_44.a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Where &lt;code&gt;foo&lt;/code&gt; is the name of the library (python, thread, etc&amp;hellip;) and 1_44 is the version of Boost that you&amp;rsquo;ve built.&lt;/p&gt;
+
+&lt;p&gt;next:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;popd
+cd ../
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to get back to the parent directory of the boost source and it&amp;rsquo;s time for&amp;hellip;&lt;/p&gt;
+
+&lt;h1&gt;Numpy&lt;/h1&gt;
+
+&lt;p&gt;This is how I got numpy to work:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/numpy/numpy.git
+cd numpy
+python setup.py build
+python setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pretty straightforward.&lt;/p&gt;
+
+&lt;h1&gt;ILMBase&lt;/h1&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t have a problem building ILMBase. I hope you don&amp;rsquo;t either. I&amp;rsquo;m leaving it out of this guide, but it&amp;rsquo;s very important that you build it before moving on.&lt;/p&gt;
+
+&lt;h1&gt;HDF5&lt;/h1&gt;
+
+&lt;p&gt;Same thing with HDF5. I think I installed it with Homebrew.&lt;/p&gt;
+
+&lt;h1&gt;Other dependencies?&lt;/h1&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t have a problem finding or building the other dependencies. Make sure you look them up in the README and that you have them installed.&lt;/p&gt;
+
+&lt;h1&gt;pyilmbase&lt;/h1&gt;
+
+&lt;p&gt;Here&amp;rsquo;s where we do some more magic. Download and extract pyilmbase &lt;a href=&quot;http://www.openexr.com/downloads.html&quot;&gt;from the web site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Build pyilmbase (I&#39;ve already extracted it)
+cd pyilmbase-1.0.0 #Or whatever version you&#39;ve downloaded.
+export CPPFLAGS=&quot;-I/usr/local/lib/python2.7/site-packages/numpy/core/include/&quot;
+./configure --with-boost-include-dir=/usr/local/include/boost-1_44/ --with-boost-lib-dir=/usr/local/lib --with-boost-python-libname=boost_python-mt-1_44
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Okay, if that has worked, now we can move on to the heavy hitter&amp;hellip;&lt;/p&gt;
+
+&lt;h1&gt;Alembic and pyalembic&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;# Build Alembic:
+curl http://alembic.googlecode.com/files/Alembic_1.1.3_2013021100.tgz &amp;gt; Alembic.tgz
+tar -xvf Alembic.tgz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Change into the extracted alembic source dir.&lt;/p&gt;
+
+&lt;p&gt;If you want to, you can rebuilt your &lt;code&gt;locate&lt;/code&gt; database before bootstrapping, but since we&amp;rsquo;ll be feeding almost everything in by hand on the command line, I wouldn&amp;rsquo;t worry about it. I&amp;rsquo;ve included the command to do so here for future reference, however.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Rebuild the `locate` library used for finding headers, etc...
+# sudo /usr/libexec/locate.updatedb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;K, here&amp;rsquo;s where it got a little hairy.
+I had to edit &lt;code&gt;Python/PyAlembic/CMakeLists.txt&lt;/code&gt; to reflect the structure of the python installation on my disk.&lt;/p&gt;
+
+&lt;p&gt;I will leave that up to you, as it&amp;rsquo;s a little more detailed than I want to write currently. I found the CMake GUI tool useful at this point, as I could try and run the configuration repeatedly, and fix whatever was failing as I went along.&lt;/p&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t change the CMakeLists file, you&amp;rsquo;ll likely run into a &amp;ldquo;python libraries not found&amp;rdquo; CMake configuration error.&lt;/p&gt;
+
+&lt;p&gt;If you can&amp;rsquo;t figure this out, leave a comment below and I&amp;rsquo;ll be happy to try and help.&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve got the correct paths to python set up in the cmake file, we have to do one more thing.&lt;/p&gt;
+
+&lt;p&gt;For some reason, the cmake files in this project use the cmake variable &lt;code&gt;BOOST_PYTHON_LIBRARY&lt;/code&gt; but my build wasn&amp;rsquo;t happy until I did a search and replace through the whole source project, changing it to: &lt;code&gt;Boost_PYTHON_LIBRARY&lt;/code&gt;. I did that using the wonderful search and replace feature of Sublime Text 2.&lt;/p&gt;
+
+&lt;p&gt;Now, we should be able to run the bootstrap command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python build/bootstrap/alembic_bootstrap.py \
+--dependency-install-root=/usr/local/ \
+--hdf5_include_dir=/usr/local/include/ \
+--hdf5_hdf5_library=/usr/local/lib/libhdf5.a \
+--ilmbase_include_dir=/usr/local/include/OpenEXR/ \
+--ilmbase_imath_library=/usr/local/lib/libImath.a \
+--pyilmbase_include_dir=/usr/local/include/OpenEXR/ \
+--pyilmbase_pyimath_library=/usr/local/lib/libPyImath.1.0.0.dylib \
+--pyilmbase_pyimath_module=/usr/local/lib/python2.7/site-packages/imathmodule.so \
+--boost_include_dir=/usr/local/include/boost-1_44/ \
+--boost_thread_library=/usr/local/lib/libboost_thread-mt-1_44.a \
+--boost_python_library=/usr/local/lib/libboost_python-mt-1_44.a \
+--zlib_include_dir=/usr/include/ \
+--zlib_library=/usr/lib/libz.1.2.5.dylib \
+--enable-pyalembic \
+../alembic_build
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Look at all of those nasty parameters. You may have to adapt some of those paths to your fit your system layout.&lt;/p&gt;
+
+&lt;p&gt;Now:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ../alembic_build        #go to the build directory
+make -j8                   #to build with eight cores. Adjust this number accordingly.
+make install               #this will build the alembic libraries.
+cd python
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, I had to &lt;code&gt;cd&lt;/code&gt; to &lt;code&gt;/usr/local/alembic-1.1.3/lib/&lt;/code&gt; and there I found two libraries: alembicglmodule.dylib, and alembicmodule.dylib&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t know why these came out as &lt;code&gt;dylib&lt;/code&gt;s instead of &lt;code&gt;so&lt;/code&gt;s. So just copy them to your python &lt;code&gt;site-packages&lt;/code&gt; folder, and rename them with the extension &lt;code&gt;.so&lt;/code&gt; instead of &lt;code&gt;.dylib&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then, pop open python and&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import imath
+import alembic
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s important to note that you may always have to import imath BEFORE importing alembic. When I didn&amp;rsquo;t, I got the error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;TypeError: No Python class registered for C++ class PyImath::FixedArray&amp;lt;unsigned char&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://groups.google.com/forum/?fromgroups=#!topic/alembic-discussion/iqo1MKE4kyc&quot;&gt;See my post on the alembic group for more info&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s the distilled version of what I did over the past week or so to get this built.&lt;/p&gt;
+
+&lt;p&gt;Whew.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Maya, PyQt and Mt Lion</title>
+   <link href="http://murphyrandle.com/posts/maya-pyqt-and-mt-lion"/>
+   <updated>2013-02-09T23:30:00-07:00</updated>
+   <id>http://murphyrandle.com/posts/maya-pyqt-and-mt-lion</id>
+   <content type="html">&lt;p&gt;It turns out that to run PyQt from within Maya you need to build a custom version of QT, and then build PyQt on top of that. This is kind of a pain, but thanks to &lt;a href=&quot;http://www.justinfx.com/&quot;&gt;JustinFX&lt;/a&gt; and his build scripts, called MyQt4, the pain of doing this on a Mac is soothed:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/justinfx/MyQt4&quot;&gt;https://github.com/justinfx/MyQt4&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re running 10.7, or 10.6, your life is really easy. Just download some of the pre-built packages that he has provided. If you&amp;rsquo;re running 10.8, you&amp;rsquo;ve got to do a little fiddling to get this to work.&lt;/p&gt;
+
+&lt;p&gt;The new XCode 4.5+ on Mountain Lion has gotten rid of the &lt;code&gt;/Developer&lt;/code&gt; folder that used to exist. The build script for MyQt4 expects to be running on 10.7, so it tries to use files from that directory. You can modify the MakeFile if you want, but I chose to create a symlink from &lt;code&gt;/Developer&lt;/code&gt; to the new location: &lt;code&gt;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer&lt;/code&gt; so that I wouldn&amp;rsquo;t have to keep modifying paths in the future.&lt;/p&gt;
+
+&lt;p&gt;You can do that like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+sudo ln -s /Developer /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then just &lt;code&gt;cd&lt;/code&gt; to &lt;code&gt;/&lt;/code&gt; and &lt;code&gt;ls -la&lt;/code&gt; to make sure you have a new symlink pointing to the correct location.&lt;/p&gt;
+
+&lt;p&gt;The second thing we have to do is download the SDK for OS X 10.6. They are removed from OS X 10.8 but QT only supports building on 10.6 :frown:. I found someone who was kind enough to host a zipped archive of the files here: &lt;a href=&quot;http://www.jamesgeorge.org/uploads/MacOSX10.6.sdk.zip&quot;&gt;http://www.jamesgeorge.org/uploads/MacOSX10.6.sdk.zip&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Download them, unarchive them, and put them into /Developer.&lt;/p&gt;
+
+&lt;p&gt;Now, when you try to build MyQt4, it should work fine!&lt;/p&gt;
+
+&lt;p&gt;The last step, building a package, will fail because the methods of package building have also changed in 10.8, but don&amp;rsquo;t worry. It should install the appropriate files anyway.&lt;/p&gt;
+
+&lt;p&gt;Good luck!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Building python modules. (Boost.Python, SCons, and Mac).</title>
+   <link href="http://murphyrandle.com/posts/boost-dot-python"/>
+   <updated>2012-10-11T12:35:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/boost-dot-python</id>
+   <content type="html">&lt;p&gt;I’ve mentioned before that I’m helping a colleague with the vizualizations for his master’s thesis. He’s in love with C++, and has written his whole implementation that way. I, however, am in love with Python. Plus, I’m going to be doing some integration with Maya, and would much rather use the Maya python api than the C++ API.&lt;/p&gt;
+
+&lt;p&gt;This is where Boost.Python comes in. &lt;a href=&quot;http://www.boost.org/&quot;&gt;Boost&lt;/a&gt; is a great collection of libraries for extending the functionality and convenience of C++. Boost.Python is a convenient wrapper to Python’s C API. This makes it comparatively easy to expose a python API to existing C++ code. And that’s just what I’m trying to do.&lt;/p&gt;
+
+&lt;p&gt;This little article documents the few things I had to get straight in   my mind for this situation to work on my custom project. building with SCons, on a Mac. It’s not a guide to using Boost.Python.&lt;/p&gt;
+
+&lt;h2&gt;Build boost.&lt;/h2&gt;
+
+&lt;p&gt;First, you’ll need to build the boost libraries for your system and make sure that they are located in a place where you can link to them. Not all boost libraries need to be compiled, but Boost.Python does.&lt;/p&gt;
+
+&lt;h2&gt;Get your SConstruct right!&lt;/h2&gt;
+
+&lt;p&gt;It took me quite a bit of experimenting and searching to get the correct configuration in my SConstruct file. Here’s the working copy:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;libs = Split(&quot;boost_python&quot;)
+libpath = Split(&quot;lib/x86_64-mac&quot;)
+includes = Split(&quot;include /usr/include/python2.7 &quot;)
+frameworks = Split(&quot;Python&quot;)
+
+env = Environment(
+                  CPPPATH = includes,
+                  LIBS = libs,
+                  LIBPATH = libpath,
+                  FRAMEWORKS = frameworks,
+                  SHLIBPREFIX = &#39;&#39;,
+                  SHLIBSUFFIX = &#39;.so&#39;
+                )
+
+env.SharedLibrary(&#39;hello_ext&#39;, &#39;hello.cpp&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;libs&lt;/code&gt; (in line 1) stores the string that will tell SCons we are going to be looking for the boost_python compiled library when linking.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;libpath&lt;/code&gt; is the path to those libraries.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;includes&lt;/code&gt; Boost.Python will need access to &lt;code&gt;pyconfig.h&lt;/code&gt; and other python C++ headers, which are located where your python install includes are. If you don’t include this directory, your build will break!&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;frameworks = “Python”&lt;/code&gt; Since we’re on a mac, we need to tell SCons to include the Python system framework while compiling.&lt;/p&gt;
+
+&lt;p&gt;Now let me draw your attention to the line &lt;code&gt;SHLIBSUFFIX=‘.so’&lt;/code&gt;. Python, when importing, expects either a &lt;code&gt;.py&lt;/code&gt; file, or a &lt;code&gt;.so&lt;/code&gt; file. The default mac extension for a shared library is &lt;code&gt;.dylib&lt;/code&gt;. With this variable we are telling SCons to use the &lt;code&gt;.so&lt;/code&gt; suffix instead of the default.&lt;/p&gt;
+
+&lt;p&gt;Lastly, we use &lt;code&gt;env.SharedLibrary&lt;/code&gt; to build the shared object file. It’s important that the name of the shared library be the same as the module name you told Boost.Python to give your module in the C++ file.&lt;/p&gt;
+
+&lt;p&gt;That’s it! You should be able to properly build now.
+If you have any questions, feel free to leave a comment.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>JSON to Python in an Object!</title>
+   <link href="http://murphyrandle.com/posts/json-to-python-in-an-object"/>
+   <updated>2012-09-18T10:36:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/json-to-python-in-an-object</id>
+   <content type="html">&lt;p&gt;In order to get our object-oriented data back and forth between C++ and Python, my colleague and I decided to read / write JSON formatted text files.&lt;/p&gt;
+
+&lt;p&gt; I&amp;rsquo;m a little picky when it comes to syntax and clarity. Python dictionaries, although well made, aren&amp;rsquo;t my favorite thing to use due to the extra brackets and characters needed to access their members.&lt;/p&gt;
+
+&lt;p&gt;I wanted an easy want to turn my JSON file into a python object with &lt;code&gt;.&lt;/code&gt; accessible attributes.&lt;/p&gt;
+
+&lt;p&gt;With the help from (this question on SO)[http://stackoverflow.com/questions/3031219/python-recursively-access-dict-via-attributes-as-well-as-index-access] I customized this solution:&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/3743805.js&quot;&gt; &lt;/script&gt;
+
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;The idea is that a JSON file from disk can be passed in to the constructer, and a new object will created with the members accessible  like this: &lt;code&gt;foo.bar&lt;/code&gt; instead of like this: &lt;code&gt;foo[&#39;bar&#39;]&lt;/code&gt;. If you find this useful, or you have a suggestion, leave a comment!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>SCONS Change Build Executable</title>
+   <link href="http://murphyrandle.com/posts/scons-change-build-executable"/>
+   <updated>2012-09-18T10:34:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/scons-change-build-executable</id>
+   <content type="html">&lt;p&gt;I really like the idea of &lt;a href=&quot;http://www.scons.org&quot;&gt;SCons&lt;/a&gt; but in practice I tend to spend much more time searching for simple answers than I do getting work done. However, I think that some day I&amp;rsquo;ll understand enough that it&amp;rsquo;ll save me a lot of time.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m working with a colleague on some research right now. He&amp;rsquo;s using gcc 4.7 because it supports the newer C++ standards.&lt;/p&gt;
+
+&lt;p&gt;In order to compile  on my Mac, I had to first install gcc 4.7 through &lt;a href=&quot;http://mxcl.github.com/homebrew/&quot;&gt;homebrew&lt;/a&gt; using this command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install --enable-cxx https://raw.github.com/Homebrew/homebrew-dupes/master/gcc.rb  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://apple.stackexchange.com/questions/38222/how-do-i-install-gcc-via-homebrew&quot;&gt;Instructions found on this thread&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This will install some new executables, &lt;code&gt;gcc-4.7&lt;/code&gt; and &lt;code&gt;g++-4.7&lt;/code&gt; being one of them.&lt;/p&gt;
+
+&lt;p&gt;Now we need SCons to call 4.7 instead of Apple&amp;rsquo;s default old version. Thanks to kind souls on the Stack Exchange chat, I provide this command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;env = Environment(CXX = &#39;g++-4.7&#39;)  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Whatever command we type between those quotes will be what SCons passes to the shell as the compiler executable. In my case the env=Environment() was already called with a ton of arguments. I only wanted to change the compiler command for my particular platform, so I used the following lines:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if platform.system() == &#39;Darwin&#39;:
+        env[&#39;CXX&#39;] = &#39;g++-4.7&#39;
+        print &quot;Running on a mac&quot;
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Image Magick</title>
+   <link href="http://murphyrandle.com/posts/image-magick"/>
+   <updated>2012-08-08T14:41:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/image-magick</id>
+   <content type="html">&lt;p&gt;Today I made an animated GIF as a UI element for a tool I’m working on.&lt;br/&gt;
+I really dislike crummy looking images, so I fiddled with ImageMagick until I found that the folling command  would build a satisfactory GIF:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;convert -loop 0 -quality 100 -delay 1 +dither -enhance *.jpg foo.gif&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;+dither&lt;/code&gt; will turn off dithering, this brings you a lot closer to your original image quality.&lt;br/&gt;
+I tried to find out how to set the frame rate as well, and the docs page says that the &lt;code&gt;-delay&lt;/code&gt; option can be input in the following fashion: ticks/ticks-per-second. Idealy, this would allow me to set the frame rate to 60 FPS by entering the value: 1x60. However, experimentation yielded no different results than the default values.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>FFMPEG Can Handle the Globs</title>
+   <link href="http://murphyrandle.com/posts/ffmpeg-can-handle-the-globs"/>
+   <updated>2012-08-03T22:51:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/ffmpeg-can-handle-the-globs</id>
+   <content type="html">&lt;p&gt;Today at work I had to make a .webm file out of a sequince of images.&lt;br/&gt;
+Easy, right? Just use FFMPEG! Well, at first it wasn’t so easy due to two little things:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;I needed to be able to convert image sequences with variable frame padding around the numbers, and I didn’t have the time, or the desire to go and write a module to find all of the numbers in one of the filenames, and replce them with %d.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The sequnce did not necessarily start at zero.&lt;br/&gt;
+As I tested, I got more and more frustrated, wondering if there really was no possible way to pass in something as simple as &lt;code&gt;image_*.jpg&lt;/code&gt; and have it just work!&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;All of the forum searching and stack-overflowing I did only fueled the frustration.&lt;br/&gt;
+Finally, as a last resort, I turned to the ffmpeg website documentation, where I found this:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;&lt;a href=&quot;http://ffmpeg.org/ffmpeg.html&quot;&gt;When importing an image sequence, -i also supports expanding shell-like wildcard patterns (globbing) internally. To lower the chance of interfering with your actual file names and the shell’s glob expansion, you are required to activate glob meta characters by prefixing them with a single % character, like in foo-%&lt;em&gt;.jpeg, foo-%?%?%?.jpeg or foo-00%[234%]%&lt;/em&gt;.jpeg.&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;So, that’s it. &lt;code&gt;image_%*.jpg&lt;/code&gt;! All I had to do was add a &lt;code&gt;%&lt;/code&gt; before my &lt;code&gt;*&lt;/code&gt;, and it worked just fine. It recognized all of my images, even though they did not start at 0, and I didn’t have to count the number of digits in the sequence.&lt;/p&gt;
+
+&lt;p&gt;Manuals can be great sometimes.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Keep tabs on those joints</title>
+   <link href="http://murphyrandle.com/posts/how-i-went-about-keeping-a-chain-of-joints-together"/>
+   <updated>2012-05-14T10:22:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/how-i-went-about-keeping-a-chain-of-joints-together</id>
+   <content type="html">&lt;p&gt;As a class assignment, I needed to program my own implementation of an inverse kinematics solver.&lt;br/&gt;
+In case you don&amp;rsquo;t know what on earth that is, watch this:&lt;/p&gt;
+
+&lt;iframe width=&quot;640&quot; height=&quot;480&quot; src=&quot;http://www.youtube.com/embed/euFe1S0OltQ&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+
+&lt;p&gt;We were given the freedom to choose what tools we wanted to use in completing the assignment, and I chose to use my favorite open source package, Blender. (Plus, the added bonus that I got to use Python to program, instead of C#. My brain plays well with python.)&lt;/p&gt;
+
+&lt;p&gt;In blender, it is easy to set up a parent / child relationship between objects. Whatever transform happens to the parent gets inherited by the child. I didn&amp;rsquo;t use that built-in system, however, because many of the students in the class were using a framework that included no such function. I wanted the practice of doing it myself.&lt;/p&gt;
+
+&lt;p&gt;I had to do a little bit of trigonometry, and a little bit of recursion. In the end, however, the solution is pretty simple. We just need to follow a couple of rules:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;When a parent is rotated, the child receives the same rotation amount, applied in its own object space, that the parent does. (If I rotate the parent 20 degrees about the z axis, the child will also have those 20 degrees added to whatever its current rotation is.)&lt;/li&gt;
+&lt;li&gt;The same rule applies to translation, and to scale. (I only implemented rotation and translation this time. I&amp;rsquo;ve heard it said that the first great virtue of every programmer is laziness.)&lt;/li&gt;
+&lt;li&gt;If the child has children, each of these transforms must be propagated down the line.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Here&amp;rsquo;s the tricky part:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If a parent is rotated, both the translation and rotation of its child must be updated, as the child needs to stay attached to the end of the parent.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Quick note&lt;/strong&gt;: I&amp;rsquo;m sorry I don&amp;rsquo;t have any pretty pictures to make this easy to understand. Let&amp;rsquo;s just call it an exercise in imagination and mental imaging. Also, just to clarify, I&amp;rsquo;m not going to explain how to set up the whole solver. This post is only explains how I did the parent-child relationship of joints.&lt;/p&gt;
+
+&lt;h2&gt;Solving the tricky part:&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take a scenario, and break it down.&lt;/p&gt;
+
+&lt;h4&gt;Scenario:&lt;/h4&gt;
+
+&lt;p&gt;Rotate the root of a three bone chain some positive angle about the Z axis.&lt;/p&gt;
+
+&lt;h4&gt;Steps:&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Rotate the root bone, just like we want.&lt;/li&gt;
+&lt;li&gt;Use trigonometry to figure out the world coordinates of the end of the bone, where its child will sit:&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;code&gt;python Pseudocode for finding endpoint.
+X = WorldPositionOfRootBone + Length * cos(rotation)  
+Y = WorldPositionOfRootBone + Length * sin(rotation)
+&lt;/code&gt;
+3. Move the child bone to that world location.
+4. Apply the same rotation to the child bone that was applied to the root bone.&lt;/p&gt;
+
+&lt;h4&gt;Here&amp;rsquo;s where it gets interesting:&lt;/h4&gt;
+
+&lt;p&gt;&lt;em&gt;Note, the code you will see is Python 3, written for the Blender Game Engine using the Blender API. It&amp;rsquo;s not intended to be a complete example.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Recursion can be either miraculous, or mind-busting. I often find it to be a little of both. We are going to use recursion in this circumstance, to make sure that all bones in the chain get updated correctly.&lt;/p&gt;
+
+&lt;p&gt;In my implementation I made a new class for a joint, and I had each joint hold a pointer to its child. A little like this:&lt;/p&gt;
+
+&lt;p&gt;``` python
+class Joint(object):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def __init__(self, obj, child=None, length=10):
+    self.o = obj
+    self.child = child
+    self.length = length
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;When the rotation method is called on the root bone, it goes through the process described above, but before end of the method for movement / orientation in a joint, a call is made to update the movement / orientation on its child, if any child exists. Like this:&lt;/p&gt;
+
+&lt;p&gt;``` python&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def rotateRelative(self, rot):
+    self.o.applyRotation([0, 0, rot])
+    self.updateChildren(rot)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;``
+And this is what the&lt;/code&gt;self.updateChildren()` method looks like:&lt;/p&gt;
+
+&lt;p&gt;``` python
+def updateChildren(self, rot=0):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    if(self.child):
+        self.updateChildRot(rot)
+        self.updateChildPos()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;This way, and time a bone is moved, it makes sure to move all of its children before finishing.
+Here&amp;rsquo;s a little video of how my robot arm turned out:&lt;/p&gt;
+
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;http://www.youtube.com/embed/MxWtpxjix-8&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Renderman Training Tidbits, No. 1</title>
+   <link href="http://murphyrandle.com/posts/renderman-training-tidbits-no-1"/>
+   <updated>2012-02-23T00:00:00-07:00</updated>
+   <id>http://murphyrandle.com/posts/renderman-training-tidbits-no-1</id>
+   <content type="html">&lt;p&gt;Here&amp;rsquo;s a video tutorial on attenuating lights with pre-calculated occlusion in RenderMan Studio 3.
+Thanks to Bert Poole and Chris Harvey for helping!&lt;/p&gt;
+
+&lt;iframe width=&quot;1280&quot; height=&quot;720&quot; src=&quot;http://www.youtube.com/embed/kRHmGVViySw&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Intermediate GNU Make tutorial.</title>
+   <link href="http://murphyrandle.com/posts/intermediate-gnu-make-tutorial"/>
+   <updated>2011-10-21T00:00:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/intermediate-gnu-make-tutorial</id>
+   <content type="html">&lt;p&gt;When I was just starting to use GNU MAKE, I was frustrated out of my mind, trying to learn how to set up an efficient makefile for my small school project.&lt;/p&gt;
+
+&lt;p&gt;The tutorials I found were either basic, or too in-depth. I found no help for a novice user. Eventually, I dug into the manual and spent a number of hours figuring out how to do what I wanted. Then I made this video, which gives a few hints on how to do some automation in your makefile, without using crazy wizard magic.&lt;/p&gt;
+
+&lt;h4&gt;Disclaimer:&lt;/h4&gt;
+
+&lt;p&gt;Please remember that this is not a bullet proof solution. After all, a novice came up with it. Nevertheless it worked fine for my small school assignment.&lt;/p&gt;
+
+&lt;iframe width=&quot;960&quot; height=&quot;720&quot; src=&quot;http://www.youtube.com/embed/dqflr7_TqQ8&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Google Voice texting tool.</title>
+   <link href="http://murphyrandle.com/posts/google-voice-texting-tool"/>
+   <updated>2011-08-24T00:00:00-06:00</updated>
+   <id>http://murphyrandle.com/posts/google-voice-texting-tool</id>
+   <content type="html">&lt;p&gt;My wife and I sometime volunteer to be leaders for the new students at our university. Since we need to contact 30 students at a time, and they all have cell phones, texting is the way to go.  The problem is that it seems like most cell phone carriers (including google voice) don&amp;rsquo;t allow sending an SMS to more than about five people at once (to reduce spam?). Here&amp;rsquo;s the script I wrote to get around that:&lt;/p&gt;
+
+&lt;h2&gt;Google Voice, a marvelous tool:&lt;/h2&gt;
+
+
+&lt;p&gt;If you haven&amp;rsquo;t checked out &lt;a href=&quot;http://voice.google.com&quot;&gt;Google Voice&lt;/a&gt; yet, I highly recommend doing so. Google Voice provides Free SMS plus a number of other features. I use SMS most regularly though. I love the ease with which I can view and compose text messages right from the browser. It does require that you sign up for a new free number. I did that a year ago, and I just give people my google number now, which forwards to my cell number.&lt;/p&gt;
+
+&lt;p&gt;Google voice in the browser will not let you send an SMS to more than five people at once, so here&amp;rsquo;s where I had to turn to:&lt;/p&gt;
+
+&lt;h2&gt;pygooglevoice&lt;/h2&gt;
+
+
+&lt;p&gt;&lt;a href=&quot;http://code.google.com/p/pygooglevoice/&quot;&gt;pygooglevoice&lt;/a&gt; is a python API for google voice. This means that I can use the functions that GV offers without having to use their interface. It means that I can use them from a script, which is MUCH more convenient for mass operations.&lt;/p&gt;
+
+&lt;p&gt;To install it on mac os X, i just opened the terminal and run this command:&lt;/p&gt;
+
+&lt;pre class=&quot;syntax {bash}&quot;&gt;sudo easy_install -U pygooglevoice&lt;/pre&gt;
+
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://snipt.net/murphyspublic/send-sms-using-google-voice/&quot;&gt;and then I wrote this little script to be able to send texts to a list of people. The cool thing is that if you type &amp;ldquo;NAME&amp;rdquo; in all caps in the body of the text, it will be replaced by the name of the person who is being texted.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</content>
+ </entry>
+ 
+
+</feed>

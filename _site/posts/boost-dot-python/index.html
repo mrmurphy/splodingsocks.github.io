@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Building python modules. (Boost.Python, SCons, and Mac).</title>
+
+  <meta name="author" content="Murphy J.C. Randle" />
+  <meta name="description" content="Articles about Web engineering and software development by Murphy Randle" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="alternate" type="application/rss+xml" href="/atom.xml" />
+
+  <link href="/css/up.css" rel="stylesheet">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-57x57-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-fixed-top navbar-default navbar-blog" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-pages">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Murphy Randle</a>
+  </div>
+
+  <div class="collapse navbar-collapse navbar-pages">
+    <ul class="nav navbar-nav navbar-right hidden-print thin">
+      <li>
+        <a class="hidden-xs" href="http://github.com/caarlos0/up"
+        title="Get this theme!">
+        <i class="icon-download icon-large"></i>
+      </a>
+      <a class="visible-xs" href="http://github.com/caarlos0/up"
+      title="Get this theme!">
+      <i class="icon-download icon-large"></i> Get this theme!
+    </a>
+  </li>
+  <li>
+    <a class="hidden-xs" title="About me" href="/about">
+      <i class="icon-user icon-large"></i>
+    </a>
+    <a class="visible-xs" title="About me" href="/about">
+      <i class="icon-user icon-large"></i> About me
+    </a>
+  </li>
+  <li>
+    <a class="hidden-xs" href="/atom.xml" title="Atom Feed">
+      <i class="icon-rss icon-large"></i>
+    </a>
+    <a class="visible-xs" href="/atom.xml" title="Atom Feed">
+      <i class="icon-rss icon-large"></i> Atom Feed
+    </a>
+  </li>
+</ul>
+</div>
+</nav>
+
+
+  <div class="container">
+    <article>
+  <h1>
+    <a href="/posts/boost-dot-python">Building python modules. (Boost.Python, SCons, and Mac).</a>
+  </h1>
+
+  <section class="byline">
+    October 11, 2012
+  </section>
+
+  <p>I’ve mentioned before that I’m helping a colleague with the vizualizations for his master’s thesis. He’s in love with C++, and has written his whole implementation that way. I, however, am in love with Python. Plus, I’m going to be doing some integration with Maya, and would much rather use the Maya python api than the C++ API.</p>
+
+<p>This is where Boost.Python comes in. <a href="http://www.boost.org/">Boost</a> is a great collection of libraries for extending the functionality and convenience of C++. Boost.Python is a convenient wrapper to Python’s C API. This makes it comparatively easy to expose a python API to existing C++ code. And that’s just what I’m trying to do.</p>
+
+<p>This little article documents the few things I had to get straight in   my mind for this situation to work on my custom project. building with SCons, on a Mac. It’s not a guide to using Boost.Python.</p>
+
+<h2>Build boost.</h2>
+
+<p>First, you’ll need to build the boost libraries for your system and make sure that they are located in a place where you can link to them. Not all boost libraries need to be compiled, but Boost.Python does.</p>
+
+<h2>Get your SConstruct right!</h2>
+
+<p>It took me quite a bit of experimenting and searching to get the correct configuration in my SConstruct file. Here’s the working copy:</p>
+
+<pre><code>libs = Split("boost_python")
+libpath = Split("lib/x86_64-mac")
+includes = Split("include /usr/include/python2.7 ")
+frameworks = Split("Python")
+
+env = Environment(
+                  CPPPATH = includes,
+                  LIBS = libs,
+                  LIBPATH = libpath,
+                  FRAMEWORKS = frameworks,
+                  SHLIBPREFIX = '',
+                  SHLIBSUFFIX = '.so'
+                )
+
+env.SharedLibrary('hello_ext', 'hello.cpp')
+</code></pre>
+
+<p><code>libs</code> (in line 1) stores the string that will tell SCons we are going to be looking for the boost_python compiled library when linking.</p>
+
+<p><code>libpath</code> is the path to those libraries.</p>
+
+<p><code>includes</code> Boost.Python will need access to <code>pyconfig.h</code> and other python C++ headers, which are located where your python install includes are. If you don’t include this directory, your build will break!</p>
+
+<p><code>frameworks = “Python”</code> Since we’re on a mac, we need to tell SCons to include the Python system framework while compiling.</p>
+
+<p>Now let me draw your attention to the line <code>SHLIBSUFFIX=‘.so’</code>. Python, when importing, expects either a <code>.py</code> file, or a <code>.so</code> file. The default mac extension for a shared library is <code>.dylib</code>. With this variable we are telling SCons to use the <code>.so</code> suffix instead of the default.</p>
+
+<p>Lastly, we use <code>env.SharedLibrary</code> to build the shared object file. It’s important that the name of the shared library be the same as the module name you told Boost.Python to give your module in the C++ file.</p>
+
+<p>That’s it! You should be able to properly build now.
+If you have any questions, feel free to leave a comment.</p>
+
+  <div class="pull"></div>
+  <a  href="https://twitter.com/share" class="twitter-share-button"
+data-via="murphsalot" data-lang="en" data-size="large">Tweet</a>
+<script>
+!function(d,s,id){
+  var js,fjs=d.getElementsByTagName(s)[0];
+  if(!d.getElementById(id)){
+    js=d.createElement(s);
+    js.id=id;
+    js.src="//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js,fjs);
+  }
+}(document,"script","twitter-wjs");
+</script>
+
+  <hr>
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'murphyrandle';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</article>
+
+  </div>
+
+  <div id="footer" class="hidden-print">
+  <section class="meta">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-lg-offset-4">
+          <a href="https://twitter.com/murphsalot">
+            <i class="icon icon-twitter icon-4x"></i>
+            <div>Follow me on Twitter.</div>
+          </a>
+        </div>
+        <div class="col-lg-2 next">
+          <a href="https://github.com/murphyrandle">
+            <i class="icon icon-github icon-4x"></i>
+            <div>
+              See my github profile.
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+  
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1919368-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
+
+  
+
+</body>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="/js/up.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300'
+  rel='stylesheet' type='text/css'>
+</html>
