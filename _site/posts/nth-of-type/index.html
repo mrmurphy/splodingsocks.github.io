@@ -86,29 +86,8 @@ Here&rsquo;s a little trick to help with the nth-of-type selector:</p>
 
 <p>Say you have markup that looks something like this (haml)</p>
 
-<p>```
-.wrapper</p>
-
-<pre><code>.bob
-.entry
-    one
-.entry
-    two
-.entry
-    three
-</code></pre>
-
-<p>```</p>
-
-<p>It makes sense to me that: <code>div.entry:nth-of-type(1)</code> would select the div that says &ldquo;one&rdquo;. In reality, it won&rsquo;t select anything, since .bob is the first child of .wapper (the parent of all of the divs). I won&rsquo;t rehash the rules here, <a href="http://css-tricks.com/the-difference-between-nth-child-and-nth-of-type">since Chris Coyier did such a smashing job with his blog post.</a>.</p>
-
-<p>A trick to help this work in a more expected way is to wrap those <code>.entry</code>s into their own parent:</p>
-
-<p>```
-.wrapper</p>
-
-<pre><code>.bob
-.entries
+<pre><code>.wrapper
+    .bob
     .entry
         one
     .entry
@@ -117,7 +96,20 @@ Here&rsquo;s a little trick to help with the nth-of-type selector:</p>
         three
 </code></pre>
 
-<p>```</p>
+<p>It makes sense to me that: <code>div.entry:nth-of-type(1)</code> would select the div that says &ldquo;one&rdquo;. In reality, it won&rsquo;t select anything, since .bob is the first child of .wapper (the parent of all of the divs). I won&rsquo;t rehash the rules here, <a href="http://css-tricks.com/the-difference-between-nth-child-and-nth-of-type">since Chris Coyier did such a smashing job with his blog post.</a>.</p>
+
+<p>A trick to help this work in a more expected way is to wrap those <code>.entry</code>s into their own parent:</p>
+
+<pre><code>.wrapper
+    .bob
+    .entries
+        .entry
+            one
+        .entry
+            two
+        .entry
+            three
+</code></pre>
 
 <p>And then the div with &ldquo;one&rdquo; will be selected.</p>
 

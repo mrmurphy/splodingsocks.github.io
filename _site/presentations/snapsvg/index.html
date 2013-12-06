@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>reveal.js - The HTML Presentation Framework</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+  <script>
+  document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+  </script>
+
+  <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+      <section>
+        <h1>A smattering of Snap.svg</h1>
+        <h3>How Adobe's new SVG library is used on Spacemonkey.com</h3>
+        <p>
+          <small>Created by <a href="http://murphyrandle.com">Murphy Randle</a> / <a href="http://twitter.com/murphsalot">@murphsalot</a>
+          </small>
+        </p>
+      </section>
+
+      <section>
+      <h1>I wrote a book!</h1>
+      <a  class="naked" href="https://leanpub.com/declarepeaceonvms">
+      <img class="naked centered" src="https://s3.amazonaws.com/titlepages.leanpub.com/declarepeaceonvms/large?1386102283" alt=""></a>
+      </section>
+
+      <section>
+      <div class="center">
+        <a href="http://snapsvg.io/">http://snapsvg.io</a>
+        and
+        <a href="http://spacemonkey.com/">http://spacemonkey.com</a>
+        
+      </div>
+      </section>
+
+      <section>
+      <div class="center">
+        
+        <h1>Animated GIF</h1>
+      </div>
+        <div class="float left">
+        <h2>Boons</h2>
+        <ul>
+          <li>Cohesive unit</li>
+          <li>Fixed aspect scaling</li>
+        </ul>
+        <h2>Boos</h2>
+        <ul>
+          <li>Playback control</li>
+          <li>Visual quality</li>
+        </ul>
+          
+        </div>
+        <div class="float right">
+          <img src="http://media2.giphy.com/media/HjvvlK5jJRGq4/giphy.gif" alt="">
+        </div>
+      </section>
+
+      <section data-markdown>
+        <script type="text/template">
+        ## SVG
+
+        ### Boons
+        - Cohesive unit
+        - Fixed aspect scaling
+        - High quality
+        - Browser support `:)`
+
+        ### Boos
+        - Browser support `:(`
+
+        </script>
+      </section>
+
+      <section>
+        <h1>Code!</h1>
+          <a href="https://gist.github.com/murphyrandle/7816825">https://gist.github.com/murphyrandle/7816825</a>
+      </section>
+
+      <section>
+        <h1>What about retina?</h1>
+        <div class="gist-wrapper">
+          <script src="https://gist.github.com/murphyrandle/7816979.js"></script>
+        </div>
+      </section>
+
+      <section>
+        <h1>FIN.</h1>
+        <h3>By Murphy Randle | murphyrandle.com</h3>
+      </section>
+    </div>
+
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.min.js"></script>
+
+  <script>
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: false,
+    progress: false,
+    history: true,
+    center: true,
+
+    // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Optional libraries used to extend on reveal.js
+    dependencies: [{
+      src: 'lib/js/classList.js',
+      condition: function() {
+        return !document.body.classList;
+      }
+    }, {
+      src: 'plugin/markdown/marked.js',
+      condition: function() {
+        return !!document.querySelector('[data-markdown]');
+      }
+    }, {
+      src: 'plugin/markdown/markdown.js',
+      condition: function() {
+        return !!document.querySelector('[data-markdown]');
+      }
+    }, {
+      src: 'plugin/highlight/highlight.js',
+      async: true,
+      callback: function() {
+        hljs.initHighlightingOnLoad();
+      }
+    }, {
+      src: 'plugin/zoom-js/zoom.js',
+      async: true,
+      condition: function() {
+        return !!document.body.classList;
+      }
+    }, {
+      src: 'plugin/notes/notes.js',
+      async: true,
+      condition: function() {
+        return !!document.body.classList;
+      }
+    }]
+  });
+  </script>
+
+</body>
+
+</html>
