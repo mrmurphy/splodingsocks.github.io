@@ -46,13 +46,13 @@ Make a file with a main function in it (probably at src/Main.hs)
 Make a file with a license in it, and call it LICENSE (either do this, or comment out ` — license-file: LICENCE` from your foo.cabal file, the build will fail if it looks for that file and it doesn’t exist.
 Uncomment `main-is:` in your foo.cabal file and point it at the Main file you just made. Something like this:
 
-```
+{% highlight yaml%}
 ...
 executable foo
   main-is: src/Main.hs
   -- other-modules:
 ...
-```
+{% endhighlight %}
 
 ## 5) Use Haskell LTS
 
@@ -76,7 +76,7 @@ Now we want to install our Web framework. In this case, I was recommended Scotty
 
 Open your foo.cabal file and add `scotty` without any version constraints to the list of build-depends. Here’s an example of what it might look like:
 
-```
+{% highlight yaml%}
 ...
 executable foo
   main-is: src/Main.hs
@@ -85,7 +85,7 @@ executable foo
   build-depends:       base >=4.7 && <4.8,
                        scotty
 ...
-```
+{% endhighlight %}
 
 Then, if the universe likes you as much as it liked me tonight, you should be able to
 
@@ -97,7 +97,7 @@ and Scotty will be installed without an error.
 
 Drop in the minimal sample code from Scotty:
 
-```
+{% highlight haskell %}
 # FILE: src/Main.hs
 
 {-# LANGUAGE OverloadedStrings #-}
@@ -107,8 +107,7 @@ main :: IO ()
 main = scotty 5000 $ do
   get "/" $ do
     text "HELLO THERE, BOB?"
-
-```
+{% endhighlight %}
 
 And then run it!
 
