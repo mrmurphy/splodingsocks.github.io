@@ -16,7 +16,7 @@ Here are some quick specks about what I’m starting off with:
 
 I did this by first installing Stack (an alternative to `cabal-install`, which is a separate think from “Cabal the library” or “Cabal the standard”) and then using Stack to install GHCI:
 
-Follow the directions here for installing Stack: https://github.com/commercialhaskell/stack/wiki/Downloads
+Follow the directions here for installing Stack: [https://github.com/commercialhaskell/stack/wiki/Downloads](https://github.com/commercialhaskell/stack/wiki/Downloads)
 
 I dropped the executable into `/usr/local/bin` (I think), and then, if I remember correctly, I ran it and followed the nice directions to install GHCI.
 
@@ -58,13 +58,13 @@ executable foo
 
 There can be some serious pain when `cabal-install` with Hackage tries to install incompatible packages. LTS Haskell has done work to calculate versions of packages that all work well together, and make those available to Cabal.
 
-https://www.stackage.org/lts-2.19
+[https://www.stackage.org/lts-2.19](https://www.stackage.org/lts-2.19)
 
 What we want to do is take a cabal.config file from LTS Haskell, and drop it in our project directory next to our foo.cabal file. This will tell `cabal-install` to limit the packages it chooses to install to only those versions which have been specified as acceptable by the cabal.config file.
 
 You’ll probably want to pick whatever version `stack` is using globally. Take a look inside of `~/.stack/global/stack.yaml` and see what the value of ‘resolver’ is. Mine was 2.18, so I found the config file for it online. Here’s a link to the 2.19 config for your convenience:
 
-https://www.stackage.org/lts-2.19/cabal.config
+[https://www.stackage.org/lts-2.19/cabal.config](https://www.stackage.org/lts-2.19/cabal.config)
 
 Drop that in your project directory, and then:
 
@@ -118,4 +118,4 @@ And then run it!
 I started looking into *Reserve* for auto-reloading my Scotty server. It's crashed on me a few
 times, but other than that it seems to be working!
 
-https://github.com/sol/reserve
+[https://github.com/sol/reserve](https://github.com/sol/reserve)
