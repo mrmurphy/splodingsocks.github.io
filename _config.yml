@@ -38,7 +38,11 @@ links:
 timezone:    America/Denver
 future:      true
 highlighter: pygments
-markdown:    kramdown
+pygments: true
+# markdown:    kramdown
+markdown: rdiscount
+rdiscount:
+  extensions: [smart]
 
 kramdown:
   auto_ids: true
