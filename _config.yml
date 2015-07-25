@@ -1,17 +1,64 @@
-markdown: rdiscount
-pygments: true
-permalink: /posts/:title
-rdiscount:
-  extensions: [smart]
-title : Murphy Randle
-production_url : http://murphyrandle.github.io
-description: "Articles about Web engineering and software development by Murphy Randle"
-disqus_shortname: murphyrandle
-analytics: UA-1919368-1
-gauges: 
-author :
-  name : Murphy J.C. Randle
-  github : murphyrandle
-  twitter : murphsalot
-  email: murphyspublic@gmail.com
-exclude: ["vendor"]
+title:            Murph
+tagline:          Webgineer and Cheif Smile Officer
+description:      Murphy's technical blog. Find writing about software engineering and web development here.
+canonical: http://murphyrandle.github.io
+
+# Owner/author information
+owner:
+  name:           Murphy Randle
+  avatar:         avatar.png
+  bio:            "Webgineer and Cheif Smile Officer"
+  email:          murphyspublic@gmail.com
+  twitter:        murphxyz
+  github:         murphyrandle
+  disqus:         murphyrandle
+  location:       "Lehi, Utah"
+  # Plug in your disqus shortname!
+
+tools:
+  standards:      "HTML, SCSS, Jekyll"
+  software:       "git"
+
+# Links to include in top navigation
+# For external links add external: true
+links:
+  # - title: About
+  #   url: /about
+  - title: Github
+    url: https://github.com/murphyrandle
+    external: true
+  - title: Twitter
+    url: https://twitter.com/murphxyz
+    external: true
+  - title: Church
+    url: https://lds.org
+    external: true
+
+# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone:    America/Denver
+future:      true
+highlighter: pygments
+markdown:    kramdown
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  use_coderay: false
+
+  coderay:
+    coderay_line_numbers:
+    coderay_line_numbers_start: 1
+    coderay_tab_width: 4
+    coderay_bold_every: 10
+    coderay_css: class
+
+sass:
+    style: :compressed
+
+# https://github.com/mojombo/jekyll/wiki/Permalinks
+permalink:   /:categories/:title
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp"]

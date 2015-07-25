@@ -1,103 +1,138 @@
-Up
---------------
+# Balzac
 
-Up is a clean and beautiful [Bootstrap](http://getbootstrap.com) based layout
-for [Jekyll](https://github.com/mojombo/jekyll).
-
-This is designed to be an easy layout to modify for your own blog. It is
-based on [zachholman's](http://zachholman.com/) blog themes: the "old" one, now
-opensourced as [left](http://github.com/holman/left), and also in his actual
-theme, that's not opensource (I believe), but I stole some ideas anyway. I also
-took something from [jekyll-bootstrap](https://github.com/plusjade/jekyll-bootstrap),
-and, of course, I'm using [bootstrap](https://github.com/twitter/bootstrap) as
-a base for whole thing.
-
-![Up 2](http://f.cl.ly/items/1k0B3m21451e0G1i3u0F/up_v2.png)
-
-## Installation
-
-- [Fork this repository](https://github.com/caarlos0/up/fork)
-- Rename it to `YOUR-USER.github.io`
-- Clone it: `git clone https://github.com/YOUR-USER/YOUR-USER.github.io`
-- With Ruby, bundler, Node.js and NPM previously installed, run the init script
-`./scripts/init`;
-- Start it up in watch mode: `foreman start -f Procfile.dev`.
-
-You should have a server up and running locally at <http://localhost:4000>.
-
-## Customization
-
-Next you'll want to change a few things. The list of files you may want to
-change is the following:
-
-- [_config.yml](https://github.com/caarlos0/up/blob/gh-pages/_config.yml): Put
-your config there, almost everything will be up and running.
-- [about/index.html](https://github.com/caarlos0/up/blob/gh-pages/about/index.html):
-Well, that's about you, I would change it if I were you... OH WAIT!
-- [CNAME](https://github.com/caarlos0/up/blob/gh-pages/CNAME): If you're using
-this on GitHub Pages with a custom domain name, you might want to change this to be
-the domain you're going to use. All that should be in here is a
-domain name on the first line and nothing else (like: `example.com`).
-- [favicon.ico](https://github.com/caarlos0/up/blob/gh-pages/favicon.ico): This
-is a smaller version of my gravatar for use as the icon in your browser's
-address bar. You may change it to whatever you like. [Updating your icons][up-icons].
-- [apple-touch-icon.jpg](https://github.com/caarlos0/up/blob/gh-pages/apple-touch-icon.jpg):
-Again, this is my gravatar, and it shows up in iOS and various other apps
-that use this file as an "icon" for your site. [Updating your icons][up-icons].
-
-[up-icons]: https://github.com/caarlos0/up#update-favicon-and-apple-precomposed-icons-based-on-gravatar
-
-### Custom CSS/JS
-
-Assets are now managed by bower. You could simply run `grunt` whenever you
-want to update your assets. `grunt watch` will also watch everything for
-changes.
-
-Note: I'm not using any Jekyll asset pipeline because it's not supported
-by [GitHub Pages](http://pages.github.com), so, I prefer to do it by myself.
+This is forked from [minimal mistakes](http://mademistakes.com). I needed some type of framework to build off as I have no experience with Jekyll. Michael set up an awesome dev environment for this which really helped speed up my progress. He also already wrote up an incredibly comprehensive readme.md so I basically copied all of it and replaced what was necessary. The design itself is my own and I cannot let you sell this or tweak the design for resale, unless I you [contact me](mailto:cole@coletownsend.com).
 
 
-### Update `favicon` and `apple-precomposed` icons based on gravatar
+If you'd like give me credit somewhere on your blog or tweet a shout out to
+[@twnsndco](https://twitter.com/twnsndco), that would be pretty sweet. 
 
-First, be sure you have the author email configured in `_config.yml`,
-then, just run:
+If you feel like donating — [Give it a thought.](http://gtat.me/balzac/donate)
 
-```sh
-rake icons
+---
+
+
+![Balzac for Jekyll](http://cl.ly/Qdzo/Screen%20Shot%202013-08-05%20at%205.35.11%20PM.jpg)
+![Balzac for Jekyll](http://cl.ly/Qdyh/Screen%20Shot%202013-08-05%20at%205.30.01%20PM.jpg)
+
+## Features:
+- flexible, uses max-width for responsive goodness
+- responsive drop down menu
+- retina images using @2x
+- post loop in the footer showing 3 latest posts
+- custom portfolio page for case studies
+
+## Basic Setup
+
+1. [Install Jekyll](http://jekyllrb.com) if you haven't already.
+2. Download this bad boy.
+3.  Fork the [Balzac repo](http://github.com/coletownsend/balzac-for-jekyll/)
+4. Twerk it out so it's just for you.
+5.  ???
+6.  Profit
+
+## [Preview the Theme](http://jekyll.gtat.me)
+=======
+ [Preview the Theme](http://jekyll.gtat.me)
+ 
+``` bash
+balzac-for-jekyll/
+├── _includes
+|    ├── footer.html  //site footer
+|    ├── head.html  //site head
+|    ├── head-dark.html  //dark site head for light pages
+├── _layouts
+|    ├── home.html  //homepage layout
+|    ├── page.html  //page layout
+|    ├── post-index.html  //post listing layout
+|    └── post.html  //post layout
+|    ├── post-no-feature.html  //feature image-less post layout
+├── _posts
+├── assets
+|    ├── css  //preprocessed less styles. good idea to minify
+|    ├── img  //images and graphics used in css and js
+|    ├── js
+|    |   ├── main.js  //jQuery plugins and settings
+|    |   └── vendor  //all 3rd party scripts
+|    └── sass 
+├── images  //images for posts and pages
+├── about.md  //about page
+├── articles.md  //lists all posts from latest to oldest
+└── index.md  //homepage. lists 5 most recent posts
 ```
 
-The script will generate your email hash and get your gravatar, then, using
-RMagick, it will create all needed icons.
+# Customization
+
+## _config.yml
+
+Most of the variables found here are used in the .html files found in `_includes` if you need to add or remove anything. A good place to start would be to change the title, tagline, description, and url of your site. When working locally comment out `url` or else you will get a bunch of broken links because they are absolute and prefixed with `{{ site.url }}` in the various `_includes` and `_layouts`. Just remember to uncomment `url` when building for deployment or pushing to **gh-pages**...
+
+### Owner/Author Information
+
+Change your name, bio, Twitter url, email, Dribbble URL, etc.
 
 
-## Deployment
+### Top Navigation Links
 
-You should deploy with [GitHub Pages](http://pages.github.com)- it's just
-easier.
+Edit page/post titles and URLs to include in the site's navigation. For external links add `external: true`.
 
-All you should have to do is to rename your repository on GitHub to be
-`username.github.io`. Since this is a Jekyll project, you
-should be able to see your new site at <http://username.github.io>.
+``` yaml
+# sample top navigation links
+links:
+  - title: About Page
+    url: /about
+  - title: Other Page
+    url: /other-page
+  - title: External Page
+    url: http://coletownsend.com
+    external: true
+```
 
-## Licensing
+## Other Stuff
 
-This is [MIT](https://github.com/caarlos0/up/blob/master/LICENSE) with no
-added caveats, therefore feel free to use this on your site without
-linking back to me or using a disclaimer or anything silly like that.
+The rest is just your average Jekyll config settings. Nothing too crazy here...
 
-If you'd like give [me](http://github.com/caarlos0),
-[holman](http://github.com/holman)
-(from [left](http://github.com/holman/left) layout),
-[plusjade](https://github.com/plusjade)
-(from [jekyll-bootstrap](https://github.com/plusjade/jekyll-bootstrap)),
-[fat](https://github.com/fat) and [mdo](https://github.com/mdo) (from
-[bootstrap](https://github.com/twitter/bootstrap)) credit somewhere on your
-all-new blog or tweet a shout out to us, well hey, sure we'll take it.
+### _includes
 
-## Donate
+For the most part you can leave these as is since the author/owner details are pulled from `_config.yml`. That said you'll probably want to customize the copyright stuff in `footer.html` to your liking.
 
-You can also thank me doing a donation =)
+### Adding Posts and Pages
 
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DXEJBUD2KYT7L)
+There are two main content layouts: `post.html` (for posts) and `page.html` (for pages). Both have large **feature images** that span the full-width of the screen, and both are meant for text heavy blog posts (or articles). 
 
-Thanks.
+### Feature Images
+
+A good rule of thumb is to keep feature images nice and wide so you don't push the body text too far down. An image cropped around around 1024 x 256 pixels will keep file size down with an acceptable resolution for most devices. 
+
+``` yaml
+image:
+# local image 
+  feature: feature-image-filename.jpg
+# link image
+  feature: "http(s)://image.domain.com/feature-image-filename.jpg"
+```
+
+This makes the assumption that the feature image is in the *images* folder unless it has a link address. To add a feature image to a post or page just include the filename in the front matter like so.
+You can "serve" images responsively with retina.js. All you need to do is have a file with @2x before the file type. That should be placed in the *images* folder. You literally don't have to do anything other than that. 2 copies. One is linked. That's it.
+Ex:
+`cool-photo@2x.jpg` 
+
+**There is a default feature image that will show up for and posts. It isn't retina or anything. It's just there in case you want one but forget <3*
+
+#### If you don't want a feature image
+…just say so in the front-matter. Go to your-post-name.md and make sure it has this guy up top.
+```
+layout: post-no-feature
+```
+
+### Categories
+
+In the sample `_posts` folder you may have noticed `category: articles` in the front matter. I like keeping all posts grouped in the same folder. If you decide to rename or add categories you will need to modify the permalink in `articles.md` along with the filename (if renaming).
+
+For example. Say you want to group all your posts under `blog/` instead of `articles/`. In your post add `category: blog` to the front matter, rename or duplicate `articles.md` to `blog.md` and change the permalink in that file to `permalink: /blog/index.html`.
+
+If done correctly `/blog` should be a page listing all the site's posts.
+
+
+## License
+
+This is free to use, fork, do whatever you want. You *cannot* sell this design though. You don't need to link me to it, but please contact me if you intend to market this theme. I am releasing premium versions of this design for select CMS's. 
