@@ -7,7 +7,7 @@ comments: true
 
 This post isn’t going to thrilling or poetic. It’s late at night and I’m trying to get to a point where I’m at least a little bit productive with Haskell. After help from a friend, experimentation, and Google searching, I think I’ve found a good way to get a simple Web server project started. I’ll quickly show the steps here.
 
-Here are some quick specks about what I’m starting off with:
+Here are some quick notes about what I’m starting off with:
 
 - Mac OS X (Homebrew and the developer tools are installed. I didn’t need to use them explicitly here, but the developer tools at least are probably needed by some of the steps implicitly)
 - Atom Editor (IDE-Haskell plugin and its crew of buddies)
