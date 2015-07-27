@@ -14,7 +14,7 @@ Here are some quick notes about what I’m starting off with:
 
 ## 1) Install Haskell
 
-I did this by first installing Stack (an alternative to `cabal-install`, which is a separate think from “Cabal the library” or “Cabal the standard”) and then using Stack to install GHCI:
+I did this by first installing Stack (an alternative to `cabal-install`, which is a separate thing from “Cabal the library” or “Cabal the standard”) and then using Stack to install GHCI:
 
 Follow the directions here for installing Stack: [https://github.com/commercialhaskell/stack/wiki/Downloads](https://github.com/commercialhaskell/stack/wiki/Downloads)
 
@@ -30,7 +30,7 @@ I then had to add `~/.local/bin` to my `~/.zshrc` file and restart Atom **(from 
 
 ## 3) Install cabal-install
 
-I was told by the nice people on IRC to just use `stack` to install and manage all of my dependencies, but unfortunately, Stack and GHC-Mod don’t play nicely together at the moment. And I feel like the editor plugin is waaay to helpful to pass up at this stage of my learning, so I decided to try and make cabal work for me. This means we have to get the "cabal-install" package installed, which will offer us the `cabal` executable to work with.
+I was told by the nice people on IRC to just use `stack` to install and manage all of my dependencies, but unfortunately, Stack and GHC-Mod don’t play nicely together at the moment. And I feel like the editor plugin is waaay to helpful to pass up at this stage of my learning, so I decided to try and make Cabal work for me. This means we have to get the "cabal-install" package installed, which will offer us the `cabal` executable to work with.
 
 `> stack install cabal-install`
 
@@ -43,7 +43,7 @@ Make a new directory, enter into it, and then
 Answer the questions it asks you, and then do a few things:
 
 Make a file with a main function in it (probably at src/Main.hs)
-Make a file with a license in it, and call it LICENSE (either do this, or comment out ` — license-file: LICENCE` from your foo.cabal file, the build will fail if it looks for that file and it doesn’t exist.
+Make a file with a license in it, and call it LICENSE (either do this, or comment out ` — license-file: LICENCE` from your foo.cabal file, the build will fail if it looks for that file and the file doesn’t exist.
 Uncomment `main-is:` in your foo.cabal file and point it at the Main file you just made. Something like this:
 
 {% highlight yaml%}
@@ -56,7 +56,7 @@ executable foo
 
 ## 5) Use Haskell LTS
 
-There can be some serious pain when `cabal-install` with Hackage tries to install incompatible packages. LTS Haskell has done work to calculate versions of packages that all work well together, and make those available to Cabal.
+There can be some serious pain when `cabal-install` tries to install incompatible packages if left unaided. LTS Haskell has done work to calculate versions of packages that all work well together, and make those available to Cabal.
 
 [https://www.stackage.org/lts-2.19](https://www.stackage.org/lts-2.19)
 
