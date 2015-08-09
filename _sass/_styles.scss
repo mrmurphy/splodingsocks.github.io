@@ -374,9 +374,6 @@ header.site-header nav {
 
             a {
                 position: relative;
-                &:hover {
-                    @include transit;
-                }
             }
 
             a:before {
@@ -389,7 +386,6 @@ header.site-header nav {
                 top: -6px;
                 left: 0;
                 text-align: center;
-                @include transit;
 
             }
 

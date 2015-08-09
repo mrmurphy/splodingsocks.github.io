@@ -11,4 +11,6 @@ I gave a little talk about what I've learned at the Utah JS Orem meet-up for Aug
 
 That's all!
 
-<iframe width="420" height="315" src="https://www.youtube.com/embed/-JlC2Q89yg4" frameborder="0" allowfullscreen></iframe>
+<div style="margin-bottom: 1em">
+  <iframe width="680" height="500" src="https://www.youtube.com/embed/-JlC2Q89yg4" frameborder="0" allowfullscreen></iframe>
+</div>
